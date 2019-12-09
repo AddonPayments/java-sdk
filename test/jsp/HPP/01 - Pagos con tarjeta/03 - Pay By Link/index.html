@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="author" content="Víctor Cantera">
+        <link rel="icon" href="../../../../assets/img/comercia_ico.png" type="image/x-icon"/ >
+        <title>Pay By Link - SDK JAVA</title>
+
+        <!-- Bootstrap 4.3.1 -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+        <!-- CSS -->
+        <link rel="stylesheet" href="../../../../assets/css/style.css">
+
+        <!-- Script para comprobar los datos de la tarjeta mediante HPP -->
+        <script src="../../../../assets/js/rxp-hpp.js"></script> <!-- Available at https://github.com/realexpayments -->
+    </head>
+
+    <body>
+        <!-- NAVBAR -->
+        <nav class="navbar navbar-expand-lg navbar-light navbar-rpdc mb-3">
+            <a class="navbar-brand">
+                <img src="../../../../assets/img/log2.svg" width="30" height="30" class="img-fluid" alt="Logo Addon Payments">
+                <span class="addonNav">ADDON</span> <span>PAYMENTS</span>
+                <span class="d-none d-sm-none d-lg-inline d-xl-inline sdkNav">
+                    <span>
+                        /SDK
+                        <span class="barraNav">_</span>
+                        de
+                        <span class="barraNav">_</span>
+                        JAVA
+                    </span>
+                </span>
+
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </a>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto pl-2 pr-2">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link pl-2 dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          Inicio
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item pl-2" href="../../../../index.html">Índice</a>
+                            <a class="dropdown-item pl-2" href="../../../errores.html">Errores de Addon Payments</a>
+                            <a class="dropdown-item pl-2" href="../../../informe.html">Convertir informe</a>
+                        </div>
+                    </li>
+                    <li class="nav-item ml-1 dropdown">
+                        <a class="nav-link pl-2 dropdown-toggle active" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Pagos con tarjeta
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            <div class="dropdown-header text-center p-0">API</div>
+                            <hr class="m-0 p-0">
+                                <a class="dropdown-item pl-2" href="../../../API/01%20-%20Pagos%20con%20tarjeta/01%20-%20Autorización/index.html">Autorización</a>
+                                <a class="dropdown-item pl-2" href="../../../API/01%20-%20Pagos%20con%20tarjeta/02%20-%20OTB/index.html">OTB</a>
+                                <a class="dropdown-item pl-2" href="../../../API/01%20-%20Pagos%20con%20tarjeta/03%20-%20Credit/index.html">Credit</a>
+                            <hr class="m-0 p-0">
+                            <div class="dropdown-header text-center p-0">HPP</div>
+                            <hr class="m-0 p-0">
+                                <a class="dropdown-item pl-2" href="../01%20-%20Autorizacion/index.html">Autorización</a>
+                                <a class="dropdown-item pl-2" href="../02%20-%20OTB/index.html">OTB</a>
+                                <a class="dropdown-item pl-2 active" href="#">Pay By Link</a>
+                        </div>
+                    </li>
+                    <li class="nav-item ml-1 dropdown">
+                        <a class="nav-link pl-2 dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Almacenamiento de tarjeta
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            <div class="dropdown-header text-center p-0">API</div>
+                            <hr class="m-0 p-0">
+                                <a class="dropdown-item pl-2" href="../../../API/02%20-%20Almacenamiento%20de%20tarjeta/01%20-%20Crear%20un%20cliente/index.html">Crear un cliente</a>
+                                <a class="dropdown-item pl-2" href="../../../API/02%20-%20Almacenamiento%20de%20tarjeta/02%20-%20Almacenar%20una%20tarjeta/index.html">Almacenar una tarjeta</a>
+                                <a class="dropdown-item pl-2" href="../../../API/02%20-%20Almacenamiento%20de%20tarjeta/03%20-%20Editar%20tarjeta/index.html">Editar tarjetas</a>
+                                <a class="dropdown-item pl-2" href="../../../API/02%20-%20Almacenamiento%20de%20tarjeta/04%20-%20Eliminar%20tarjeta/index.html">Eliminar tarjetas</a>
+                                <a class="dropdown-item pl-2" href="../../../API/02%20-%20Almacenamiento%20de%20tarjeta/05%20-%20Auth/index.html">Autorización</a>
+                                <a class="dropdown-item pl-2" href="../../../API/02%20-%20Almacenamiento%20de%20tarjeta/06%20-%20Credit/index.html">Credit</a>
+                            <hr class="m-0 p-0">
+                            <div class="dropdown-header text-center p-0">HPP</div>
+                            <hr class="m-0 p-0">
+                                <a class="dropdown-item pl-2" href="../../02%20-%20Almacenamiento%20de%20tarjeta/01%20-%20Crear%20un%20cliente/index.html">Crear un cliente</a>
+                                <a class="dropdown-item pl-2" href="../../02%20-%20Almacenamiento%20de%20tarjeta/02%20-%20Mostrar%20Tarjetas/index.html">Mostrar tarjetas</a>
+                        </div>
+                    </li>
+                      
+                    <li class="nav-item ml-1 dropdown">
+                        <a class="nav-link pl-2 dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Gestión de transacciones
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item pl-2" href="../../../API/03%20-%20Gestión%20de%20transacciones/01%20-%20Capturar/index.html">Settle (Capturar)</a>
+                            <a class="dropdown-item pl-2" href="../../../API/03%20-%20Gestión%20de%20transacciones/02%20-%20Rebate/index.html">Rebate (Devolución)</a>
+                            <a class="dropdown-item pl-2" href="../../../API/03%20-%20Gestión%20de%20transacciones/03%20-%20Void/index.html">Void (Anular transacción)</a>
+                        </div>
+                    </li>
+
+                    <li class="nav-item ml-1 dropdown">
+                        <a class="nav-link pl-2 dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Filtro de fraude
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                              
+                            <div class="dropdown-header text-center p-0">API</div>
+                            <hr class="m-0 p-0">
+                                <a class="dropdown-item pl-2"  href="../../../API/05%20-%20Fraud%20Management/01%20-%20Fraud%20Filter/index.html">Filtro de fraude</a>
+                                <a class="dropdown-item pl-2"  href="../../../API/05%20-%20Fraud%20Management/02%20-%20Address%20Verification">Verificación de dirección</a>
+                                <a class="dropdown-item pl-2"  href="../../../API/05%20-%20Fraud%20Management/03%20-%20Hold">Retener transacción</a>
+                                <a class="dropdown-item pl-2"  href="../../../API/05%20-%20Fraud%20Management/04%20-%20Lanzamiento">Lanzar transacción</a>
+                            <hr class="m-0 p-0">
+                            <div class="dropdown-header text-center p-0">HPP</div>
+                            <hr class="m-0 p-0">
+                                <a class="dropdown-item pl-2"  href="../../03%20-%20Fraud%20Management/01%20-%20Fraud%20Filter/index.html">Filtro de fraude</a>
+                        </div>
+                    </li>
+
+                    <li class="nav-item ml-1 dropdown">
+                        <a class="nav-link pl-2 dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            DCC
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            <div class="dropdown-header text-center p-0">API</div>
+                            <hr class="m-0 p-0">
+                                <a class="dropdown-item pl-2"  href="../../../API/04%20-%20DCC/01%20-%20Comprobar%20DCC/index.html">Comprobar DCC</a>
+                            <hr class="m-0 p-0">
+                            <div class="dropdown-header text-center p-0">HPP</div>
+                            <hr class="m-0 p-0">
+                                <a class="dropdown-item pl-2"href="../../04%20-%20DCC/index.html">Operación con DCC</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <!-- /NAVBAR -->
+
+        <div class="col-lg-12"> 
+            <div id="contenidoComun" class="container-fluid">
+                <div class="row">
+
+                    <!-- Menú lateral -->
+                    <div class="col-lg-2 sticky-top d-none d-sm-none d-lg-block d-xl-block MenuLateral">
+
+                        <!-- Barra de progreso -->
+                        <div class="progress-bar" id="progreso"></div>
+                        <!-- /Barra de progreso -->
+
+                	    <nav class="navbar sticky-top navbar-light" style="padding: 0px;">
+                	        <nav class="nav nav-pills flex-column">
+                	            <a class="nav-link" href="#PBLink">1. Pay By Link</a>
+                	            <nav>
+                	                <a class="nav-link ml-3 my-1" href="#codigoEjemplo">1.1 Código de ejemplo</a>
+                	            </nav>
+                	            <a class="nav-link" href="#descripciones">2. Descripciones</a>
+                	            <nav>
+                	                <a class="nav-link ml-3 my-1" id="#variables" href="#variables">2.1 Declaración de variables</a>
+                	                <a class="nav-link ml-3 my-1" id="#envPetition" href="#envPetition">2.2 Envío de la petición</a>
+                                    <a class="nav-link ml-3 my-1" id="#respuestaPay" href="#respuestaPay">2.3 Respuesta</a>
+                	            </nav>
+                	        </nav>
+                	    </nav>
+                	</div>
+                	<div class="col-lg-10" >
+                	    <!-- Punto 1 -->
+                	    <div class="contenedor">
+                	        <div class="pl-3 pt-3 pr-3 pb-4 mb-3 text-justify">
+                	            <h3 id="PBLink" class="titulo">
+                	              1. Pay By Link
+                	            </h3>
+                	            <hr>
+
+                	            <p>
+                	              Para los comercios que deseen insertar un enlace de pago en un SMS o un correo electrónico, puede enviar una solicitud a HPP para crear un enlace de transacción que se pagará dentro de las 24 horas. HPP responderá con el enlace de pago dedicado que luego se puede enviar a su cliente.
+                	            </p>
+                	            <p class="alert alert-primary" role="alert">
+                	              Para crear el enlace, puede enviar la solicitud JSON con los detalles de la transacción al HPP, la solicitud debe enviarse con el siguiente encabezado: <b>"Content-Type: application/JSON"</b>
+                	            </p>
+
+                	            <h5 style="" class="pt-3" id="codigoEjemplo">
+                	                1.1 Código de ejemplo
+                	            </h5>
+                	            
+                	            <hr>
+
+                	            <!-- Código ejemplo-->
+                	            <div class="p-4 panelCode">
+                	                <code>
+                	                    <span class="comments">// Importamos las clases necesarias para realizar las peticiones</span>
+                                        <br>
+                                            <span class="purple">import </span><span class="variables">java.io.BufferedReader</span><span class="new">;</span>
+                                        <br>
+                                        <br>
+                                            <span class="purple">import </span><span class="variables">java.io.InputStreamReader</span><span class="new">;</span>
+                                        <br>
+                                        <br>
+                                            <span class="purple">import </span><span class="variables">java.io.OutputStream</span><span class="new">;</span>
+                                        <br>
+                                            <span class="purple">import </span><span class="variables">java.net.HttpURLConnection</span><span class="new">;</span>
+                                        <br>
+                                            <span class="purple">import </span><span class="variables">java.net.URL</span><span class="new">;</span>
+                                        <br>
+                                            <span class="purple">import </span><span class="variables">org.junit.Test</span><span class="new">;</span>
+                                        <br>
+                                            <span class="purple">import </span><span class="variables">com.global.api.entities.exceptions.ApiException</span><span class="new">;</span>
+                                        <br>
+                                            <span class="purple">import </span><span class="variables">com.global.api.utils.GenerationUtils</span><span class="new">;</span>
+                                        <br>
+                                        <br>
+                                            <span class="purple">public class </span><span class="variables">Addon {</span>
+                                        <br>
+                                        <br>
+                                            <span class="pl-3 comments">@Test</span>
+                                        <br>
+                                            <span class="pl-3 purple">public void </span><span class="variables">PayByLink() </span><span class="purple">throws </span><span class="variables">ApiException {</span>
+                                        <br>
+                                        <br>
+                                            <span class="pl-5 comments">// Obtenemos el timestamp</span>
+                                        <br>
+                                            <span class="pl-5 variables">String </span><span class="orange">time </span><span class="variables">= GenerationUtils.generateTimestamp();</span>
+                                        <br>
+                                        <br>
+                                            <span class="pl-5 comments">// Obtenemos el Order ID</span>
+                                        <br>
+                                            <span class="pl-5 variables">String </span><span class="orange">order </span><span class="variables">= GenerationUtils.generateOrderId();</span>
+                                        <br>
+                                        <br>
+                                            <span class="pl-5 comments">// Realizamos el primer cálculo SHA1</span>
+                                        <br>
+                                            <span class="pl-5 variables">String </span><span class="orange">toHash </span><span class="variables">= </span><span class="orange">time</span><span class="variables">+</span><span class="new">".addonjavatest."</span><span class="variables">+</span><span class="orange">order</span><span class="variables">+</span><span class="new">".1001.EUR"</span><span class="variables">;</span>
+                                        <br>
+                                        <br>
+                                            <span class="pl-5 comments">// Realizamos el segundo cálculo del SHA1 indicando nuestro shared secret y llamando a la función "generateHash(toHash, Shared_secret);"</span>
+                                        <br>
+                                            <span class="pl-5 variables">String </span><span class="orange">Shared_secret </span><span class="variables">= </span><span class="new">"secret"</span><span class="variables">;</span>
+                                        <br>
+                                            <span class="pl-5 variables">String </span><span class="orange">sha1 </span><span class="variables">= GenerationUtils.generateHash(</span><span class="orange">toHash</span><span class="variables">, </span><span class="orange">Shared_secret</span><span class="variables">);</span>
+                                        <br>
+                                        <br>
+                                            <span class="pl-5 purple">try </span><span class="variables">{</span>
+                                        <br>
+                                            <span class="pl-6 purple">final </span><span class="variables">String </span><span class="orange">Datos </span><span class="variables">= </span><span class="new">"{\n" </span><span class="variables">+</span>
+                                        <br>
+                                            <span class="pl-8 new">"    \"TIMESTAMP\":\""</span><span class="variables">+</span><span class="orange">time</span><span class="variables">+</span><span class="new">"\",\r\n" </span><span class="variables">+</span>
+                                        <br>
+                                            <span class="pl-8 new">"    \"MERCHANT_ID\":\"addonjavatest\",\r\n"</span><span class="variables">+</span>
+                                        <br>
+                                            <span class="pl-8 new">"    \"ACCOUNT\":\"api\",\r\n"</span><span class="variables">+</span>
+                                        <br>
+                                            <span class="pl-8 new">"    \"ORDER_ID\":\""</span><span class="variables">+</span><span class="orange">order</span><span class="variables">+</span><span class="new">"\",\r\n" </span><span class="variables">+</span>
+                                        <br>
+                                            <span class="pl-8 new">"    \"AMOUNT\":\"1001\",\r\n"</span><span class="variables">+</span>
+                                        <br>
+                                            <span class="pl-8 new">"    \"CURRENCY\":\"EUR\",\r\n"</span><span class="variables">+</span>
+                                        <br>
+                                            <span class="pl-8 new">"    \"SHA1HASH\":\""</span><span class="variables">+</span><span class="orange">sha1</span><span class="variables">+</span><span class="new">"\",\r\n" </span><span class="variables">+</span>
+                                        <br>
+                                            <span class="pl-8 new">"    \"AUTO_SETTLE_FLAG\":\"1\",\r\n"</span><span class="variables">+</span>
+                                        <br>
+                                            <span class="pl-8 new">"    \"COMMENT1\":\"COMMENT1\",\r\n"</span><span class="variables">+</span>
+                                        <br>
+                                            <span class="pl-8 new">"    \"COMMENT2\":\"COMMENT2\",\r\n"</span><span class="variables">+</span>
+                                        <br>
+                                            <span class="pl-8 new">"    \"SHIPPING_CODE\":\"03201\",\r\n"</span><span class="variables">+</span>
+                                        <br>
+                                            <span class="pl-8 new">"    \"SHIPPING_CO\":\"ES\",\r\n"</span><span class="variables">+</span>
+                                        <br>
+                                            <span class="pl-8 new">"    \"BILLING_CODE\":\"03201\",\r\n"</span><span class="variables">+</span>
+                                        <br>
+                                            <span class="pl-8 new">"    \"BILLING_CO\":\"ES\",\r\n"</span><span class="variables">+</span>
+                                        <br>
+                                            <span class="pl-8 new">"    \"CUST_NUM\":\"332a85b\",\r\n"</span><span class="variables">+</span>
+                                        <br>
+                                            <span class="pl-8 new">"    \"VAR_REF\":\"Invoice ref\",\r\n"</span><span class="variables">+</span>
+                                        <br>
+                                            <span class="pl-8 new">"    \"PROD_ID\":\"SKU1231312\",\r\n"</span><span class="variables">+</span>
+                                        <br>
+                                            <span class="pl-8 new">"    \"HPP_LANG\":\"ES\",\r\n"</span><span class="variables">+</span>
+                                        <br>
+                                            <span class="pl-8 new">"    \"HPP_VERSION\":\"2\",\r\n"</span><span class="variables">+</span>
+                                        <br>
+                                            <span class="pl-8 new">"    \"MERCHANT_RESPONSE_URL\":\"https://midominio.com/response\",\r\n"</span><span class="variables">+</span>
+                                        <br>
+                                            <span class="pl-8 new">"    \"CARD_PAYMENT_BUTTON\":\"Pagar SDK JAVA\",\r\n"</span><span class="variables">+</span>
+                                        <br>
+                                            <span class="pl-8 new">"    \"SUPPLEMENTARY_DATA\":\"Datos adicionales\"\n}"</span><span class="variables">;</span>
+                                        <br>
+                                        <br>
+                                            <span class="pl-5 variables">System.</span><span class="new">out</span><span class="variables">.println(</span><span class="orange">Datos</span><span class="variables">);</span>
+                                        <br>
+                                            <span class="pl-5 variables">URL </span><span class="orange">obj </span><span class="variables">= </span><span class="purple">new </span><span class="variables">URL(</span><span class="new">"https://hpp.sandbox.addonpayments.com/pay"</span><span class="variables">);</span>
+                                        <br>
+                                            <span class="pl-5 variables">HttpURLConnection </span><span class="orange">postConnection </span><span class="variables">= (HttpURLConnection) </span><span class="orange">obj</span><span class="variables">.openConnection();</span>
+                                        <br>
+                                            <span class="pl-5 orange">postConnection</span><span class="variables">.setRequestMethod(</span><span class="new">"POST"</span><span class="variables">);</span>
+                                        <br>
+                                            <span class="pl-5 orange">postConnection</span><span class="variables">.setRequestProperty(</span><span class="new">"Content-Type"</span><span class="variables">, </span><span class="new">"application/json"</span><span class="variables">);</span>
+                                        <br>
+                                            <span class="pl-5 orange">postConnection</span><span class="variables">.setDoOutput(</span><span class="purple">true</span><span class="variables">);</span>
+                                        <br>
+                                            <span class="pl-5 variables">OutputStream </span><span class="orange">os </span><span class="variables">= </span><span class="orange">postConnection</span><span class="variables">.getOutputStream();</span>
+                                        <br>
+                                            <span class="pl-5 orange">os</span><span class="variables">.write(</span><span class="orange">Datos</span><span class="variables">.getBytes());</span>
+                                        <br>
+                                            <span class="pl-5 orange">os</span><span class="variables">.flush();</span>
+                                        <br>
+                                            <span class="pl-5 orange">os</span><span class="variables">.close();</span>
+                                        <br>
+                                        <br>
+                                            <span class="comments pl-6">// Obtenemos la respuesta y la mostramos</span>
+                                        <br>
+                                            <span class="pl-5 purple">int </span><span class="orange">responseCode </span><span class="variables">= </span><span class="orange">postConnection</span><span class="variables">.getResponseCode();</span>
+                                        <br>
+                                            <span class="pl-5 purple">if </span><span class="variables">(</span><span class="orange">responseCode </span><span class="variables">== HttpURLConnection.</span><span class="new">HTTP_OK</span><span class="variables">) {</span>
+                                        <br>
+                                            <span class="pl-6 variables">BufferedReader </span><span class="orange">in </span><span class="variables">= </span><span class="purple">new </span><span class="variables">BufferedReader(</span><span class="purple">new </span><span class="variables">InputStreamReader(</span><span class="orange">postConnection</span><span class="variables">.getInputStream()));</span>
+                                        <br>
+                                            <span class="pl-6 variables">String </span><span class="orange">inputLine</span><span class="variables">;</span>
+                                        <br>
+                                            <span class="pl-6 variables">StringBuffer </span><span class="orange">response </span><span class="variables">= </span><span class="purple">new </span><span class="variables">StringBuffer();</span>
+                                        <br>
+                                        <br>
+                                            <span class="pl-6 purple">while </span><span class="variables">((</span><span class="orange">inputLine</span><span class="variables">= </span><span class="orange">in</span><span class="variables">.readLine()) != </span><span class="purple">null</span><span class="variables">) {</span>
+                                        <br>
+                                            <span class="pl-7 orange">response</span><span class="variables">.append(</span><span class="orange">inputLine</span><span class="variables">);</span>
+                                        <br>
+                                            <span class="pl-6 variables">}</span>
+                                        <br>
+                                        <br>
+                                            <span class="pl-6 orange">in</span><span class="variables">.close();</span>
+                                        <br>
+                                        <br>
+                                            <span class="comments pl-6">// Mostramos la respuesta del servidor</span>
+                                        <br>
+                                            <span class="pl-6 variables">System.</span><span class="new">out</span><span class="variables">.println(</span><span class="orange">response</span><span class="variables">.toString());</span>
+                                        <br>
+                                        <br>
+                                            <span class="pl-6 variables">} </span><span class="purple">else </span><span class="variables">{</span>
+                                        <br>
+                                            <span class="comments pl-6">// En caso de error mostramos el mensaje</span>
+                                        <br>
+                                            <span class="pl-7 variables">System.</span><span class="new">out</span><span class="variables">.println(</span><span class="new">"Conexión errónea"</span><span class="variables">);</span>
+                                        <br>
+                                        <br>
+                                            <span class="pl-6 variables">}</span>
+                                        <br>
+                                            <span class="pl-5 variables">}</span><span class="purple"> catch</span> <span class="variables">(Exception ex) {</span>
+                                        <br>
+                                            <span class="comments pl-7">// Añada aquí su tratamiento de errores</span>
+                                        <br>
+                                            <span class="pl-7 orange">ex</span><span class="variables">.printStackTrace();</span>
+                                        <br>
+                                            <span class="pl-5 variables">}</span>
+                                        <br>
+                                            <span class="pl-4 variables">}</span>
+                                        <br>
+                                            <span class="variables">}</span>
+                	                </code>
+                	            </div>
+                	            <!-- Fin código ejemplo-->
+                	        </div>            
+                	    </div>
+                	    <!-- Punto 2 -->
+                	    <div class="contenedor">
+                	        <div class="pl-3 pt-3 mb-4 pb-1 pr-3 text-justify">
+                	           <h3 class="pt-1" id="descripciones">
+                	                2. Descripciones
+                	           </h3>
+                	           <hr>
+                	           
+                	           <h5 id="variables">2.1 Declaración de variables</h5>
+                	              <p>
+                	                Para calcular la clave SHA1 debemos declarar las variables necesarias para realizar la cadena:
+                	              </p>
+                	              <ul>
+                	                <li>
+                	                  Timestamp = Formato de la fecha actual indicando el año, la hora, los minutos y los segundos. Debemos elegir el formato "YmdHis" que corresponde con los siguientes parámetros:
+                	                </li>
+                	                  <ul>
+                	                    <li>
+                	                       <span class="arrow">String </span><span class="variableBgW">time</span><span class="arrow"> = GenerationUtils.generateTimestamp();</span>
+                	                    </li>
+                	                    <li>
+                	                       Llamamos a la función "generateTimestamp()" del archivo "GenerationUtils" para asignar a la variable "time" la fecha actual.
+                	                    </li>
+                	                  </ul>
+
+                                      <br>
+
+                                      <li>
+                                            "addonjavatest" = Identificador porporcionado por Addon Payments.
+                                      </li>
+                                      <li>
+                                            "secret" = Shared Secret porporcionado por Addon Payments.
+                                      </li>
+                                      <ul>
+                                        <li>
+                                            <small class="form-text text-muted alert alert-primary">
+                                                --&gt; En caso de que le falte algún dato de los mencionados arriba, debe contactar con su soporte técnico de Addon Payments llamando al teléfono 914 353 028 (opción 2) o enviando un email al correo electrónico <a target="_blank" href="mailto:soporteaddonpayments.com">soporteaddonpayments.com</a>.
+                                            </small>
+                                        </li>
+                                      </ul>
+
+                	                  <li>
+                	                    Order ID = Identificador de la transacción que lanzamos al servidor de Addon Payments.
+                	                  </li>
+                	                  <ul>
+                	                    <li>
+                	                      <span class="arrow">String </span><span class="variableBgW">order</span><span class="arrow"> = GenerationUtils.generateOrderId();</span>
+                	                    </li>
+                	                  </ul>
+
+                	                  <br>
+
+                	                  <li>
+                	                    Amount = Indicamos el importe de la operación.
+                	                  </li>
+
+                	                  <br>
+
+                	                  <li>
+                	                    toHash = Concatenamos los componentes necesarios para realizar posteriormente el cálculo SHA1.
+                	                  </li>
+                	                  <ul>
+                	                    <li>
+                	                      <span class="arrow">String </span><span class="variableBgW">toHash</span><span class="arrow"> = </span><span class="variableBgW">time + </span><span class="arrow">".addonjavatest."</span><span class="variableBgW"> + order + </span><span class="arrow">".1001.EUR";</span>
+                	                    </li>
+                	                  </ul>
+
+                	                  <br>
+
+                	                  <li>
+                	                    Firma SHA1 = Calculamos la clave SHA1 con nuestro Shared Secret y la cadena que hemos concatenado anteriormente.
+                	                  </li>
+
+                	                  <ul>
+                	                    <li>
+                	                      <span class="arrow">String </span><span class="variableBgW">sha1</span><span class="arrow"> = GenerationUtils.generateHash(</span><span class="variableBgW">toHash</span><span class="comentariosBgW">, </span><span class="variableBgW">Shared_secret</span><span class="arrow">);</span>
+                	                    </li>
+                	                  </ul>
+                	              </ul>
+                	              <div class="p-4 mb-4 panelCode">
+                	                <code>
+                	                       <span class="comments">// Obtenemos el timestamp</span>
+                                       <br>
+                                           <span class="variables">String </span><span class="orange">time </span><span class="variables">= GenerationUtils.generateTimestamp();</span>
+                                       <br>
+                                       <br>
+                                           <span class="comments">// Obtenemos el Order ID</span>
+                                       <br>
+                                           <span class="variables">String </span><span class="orange">order </span><span class="variables">= GenerationUtils.generateOrderId();</span>
+                                       <br>
+                                       <br>
+                                           <span class="comments">// Realizamos el primer cálculo SHA1</span>
+                                       <br>
+                                           <span class="variables">String </span><span class="orange">toHash </span><span class="variables">= </span><span class="orange">time</span><span class="variables">+</span><span class="new">".addonjavatest."</span><span class="variables">+</span><span class="orange">order</span><span class="variables">+</span><span class="new">".1001.EUR"</span><span class="variables">;</span>
+                                       <br>
+                                       <br>
+                                           <span class="comments">// Realizamos el segundo cálculo del SHA1 indicando nuestro shared secret y llamando a la función "generateHash(toHash, Shared_secret);"</span>
+                                       <br>
+                                           <span class="variables">String </span><span class="orange">Shared_secret </span><span class="variables">= </span><span class="new">"secret"</span><span class="variables">;</span>
+                                       <br>
+                                           <span class="variables">String </span><span class="orange">sha1 </span><span class="variables">= GenerationUtils.generateHash(</span><span class="orange">toHash</span><span class="variables">, </span><span class="orange">Shared_secret</span><span class="variables">);</span>
+                	                </code>
+                	              </div>
+
+                	                <ul>
+                	                  <li>
+                	                    Datos = Declaramos la variable 'Datos' como un String y asociamos los parámetros que vamos a enviar al servidor de Addon Payments. <a target="_blank" href="https://desarrolladores.addonpayments.com/#!/hosted-payments/pay-by-link">Puede ver nuestra documentación para obtener más información al respecto.</a>
+                	                  </li>
+                	                </ul>
+                	                <div class="p-4 mb-4 panelCode">
+                	                <code>
+                                        <span class="purple">final </span><span class="variables">String </span><span class="orange">Datos </span><span class="variables">= </span><span class="new">"{\n" </span><span class="variables">+</span>
+                                        <br>
+                                            <span class="pl-5 new">"    \"TIMESTAMP\":\""</span><span class="variables">+</span><span class="orange">time</span><span class="variables">+</span><span class="new">"\",\r\n" </span><span class="variables">+</span>
+                                        <br>
+                                            <span class="pl-5 new">"    \"MERCHANT_ID\":\"addonjavatest\",\r\n"</span><span class="variables">+</span>
+                                        <br>
+                                            <span class="pl-5 new">"    \"ACCOUNT\":\"api\",\r\n"</span><span class="variables">+</span>
+                                        <br>
+                                            <span class="pl-5 new">"    \"ORDER_ID\":\""</span><span class="variables">+</span><span class="orange">order</span><span class="variables">+</span><span class="new">"\",\r\n" </span><span class="variables">+</span>
+                                        <br>
+                                            <span class="pl-5 new">"    \"AMOUNT\":\"1001\",\r\n"</span><span class="variables">+</span>
+                                        <br>
+                                            <span class="pl-5 new">"    \"CURRENCY\":\"EUR\",\r\n"</span><span class="variables">+</span>
+                                        <br>
+                                            <span class="pl-5 new">"    \"SHA1HASH\":\""</span><span class="variables">+</span><span class="orange">sha1</span><span class="variables">+</span><span class="new">"\",\r\n" </span><span class="variables">+</span>
+                                        <br>
+                                            <span class="pl-5 new">"    \"AUTO_SETTLE_FLAG\":\"1\",\r\n"</span><span class="variables">+</span>
+                                        <br>
+                                            <span class="pl-5 new">"    \"COMMENT1\":\"COMMENT1\",\r\n"</span><span class="variables">+</span>
+                                        <br>
+                                            <span class="pl-5 new">"    \"COMMENT2\":\"COMMENT2\",\r\n"</span><span class="variables">+</span>
+                                        <br>
+                                            <span class="pl-5 new">"    \"SHIPPING_CODE\":\"03201\",\r\n"</span><span class="variables">+</span>
+                                        <br>
+                                            <span class="pl-5 new">"    \"SHIPPING_CO\":\"ES\",\r\n"</span><span class="variables">+</span>
+                                        <br>
+                                            <span class="pl-5 new">"    \"BILLING_CODE\":\"03201\",\r\n"</span><span class="variables">+</span>
+                                        <br>
+                                            <span class="pl-5 new">"    \"BILLING_CO\":\"ES\",\r\n"</span><span class="variables">+</span>
+                                        <br>
+                                            <span class="pl-5 new">"    \"CUST_NUM\":\"332a85b\",\r\n"</span><span class="variables">+</span>
+                                        <br>
+                                            <span class="pl-5 new">"    \"VAR_REF\":\"Invoice ref\",\r\n"</span><span class="variables">+</span>
+                                        <br>
+                                            <span class="pl-5 new">"    \"PROD_ID\":\"SKU1231312\",\r\n"</span><span class="variables">+</span>
+                                        <br>
+                                            <span class="pl-5 new">"    \"HPP_LANG\":\"ES\",\r\n"</span><span class="variables">+</span>
+                                        <br>
+                                            <span class="pl-5 new">"    \"HPP_VERSION\":\"2\",\r\n"</span><span class="variables">+</span>
+                                        <br>
+                                            <span class="pl-5 new">"    \"MERCHANT_RESPONSE_URL\":\"https://midominio.com/response\",\r\n"</span><span class="variables">+</span>
+                                        <br>
+                                            <span class="pl-5 new">"    \"CARD_PAYMENT_BUTTON\":\"Pagar SDK JAVA\",\r\n"</span><span class="variables">+</span>
+                                        <br>
+                                            <span class="pl-5 new">"    \"SUPPLEMENTARY_DATA\":\"Datos adicionales\"\n}"</span><span class="variables">;</span>
+                	                </code>
+                	            </div>
+
+                	            <hr>
+
+                	            <h5 id="envPetition" class="mt-3">
+                	                2.2 Envío de la petición
+                	            </h5>
+
+                	              <p>
+                	                Para realizar el envío de la petición al servidor de Addon Payments, debemos indicar la URL a la que queremos apuntar, el método de envío (GET o POST) y la cabecera 'application/json'.
+                	              </p>
+
+                	              <ul>
+                	                <li>
+                	                   Para desarrollar mostramos los datos que enviamos al realizar la llamada:
+                	                </li>
+                	                <ul>
+                	                  <li>
+                	                    <span class="arrow">System</span><span class="variableBgW">.out</span><span class="arrow">.println(</span><span class="orangeBgW">Datos</span><span class="arrow">);</span>
+                	                  </li>
+                	                </ul>
+
+                	                <br>
+
+                	                <li>
+                	                  Indicamos la URL del servidor de Addon Payments:
+                	                </li>
+                	                <ul>
+                	                  <li>
+                	                    <span class="arrow">URL </span><span class="orangeBgW">obj </span><span class="arrow">= </span><span class="orangeBgW">new </span><span class="arrow">URL("https://hpp.sandbox.addonpayments.com/pay");</span>
+                	                  </li>
+                	                </ul>
+
+                	                <br>
+
+                	                <li>
+                	                  Iniciamos la conexión con el servidor:
+                	                </li>
+                	                <ul>
+                	                  <li>
+                	                    <span class="arrow">HttpURLConnection </span><span class="orangeBgW">postConnection </span><span class="arrow">= (HttpURLConnection) </span><span class="orangeBgW">obj</span><span class="arrow">.openConnection();</span>
+                	                  </li>
+                	                </ul>
+
+                	                <br>
+
+                	                <li>
+                	                  Indicamos que el método de envío debe ser mediante POST:
+                	                </li>
+                	                <ul>
+                	                   <li>
+                                        <span class="orangeBgW">postConnection</span><span class="arrow">.setRequestMethod("POST");</span>
+                	                   </li>
+                	                </ul>
+
+                	                <br>
+
+                	                <li>
+                	                  Indicamos en la cabecera que el formato en el que vamos a enviar los datos es en JSON:
+                	                </li>
+                	                <ul>
+                	                  <li>
+                	                    <span class="orangeBgW">postConnection</span><span class="arrow">.setRequestProperty("Content-Type", "application/json");</span>
+                	                  </li>
+                	                </ul>
+
+                	                <br>
+
+                	                <li>
+                	                  Asignamos el parámetro '.setDoOutput()' a 'true' porque enviamos la petición vía POST:
+                	                </li>
+                	                <ul>
+                	                  <li>
+                	                    <span class="orangeBgW">postConnection</span><span class="arrow">.setDoOutput(true);</span>
+                	                  </li>
+                	                </ul>
+
+                	                <br>
+
+                	                <li>
+                	                  Asociamos a la variable 'os' la secuencia de salida del subproceso:
+                	                </li>
+                	                <ul>
+                	                  <li>
+                	                    <span class="arrow">OutputStream </span><span class="orangeBgW">os </span><span class="arrow">= </span><span class="orangeBgW">postConnection</span><span class="arrow">.getOutputStream();</span>
+                	                  </li>
+                	                </ul>
+
+                	                <br>
+
+                	                <li>
+                	                  Convertimos a String la secuencia de bytes y devolvemos un array:
+                	                </li>
+                	                <ul>
+                	                  <li>
+                	                    <span class="orangeBgW">os</span><span class="arrow">.write(</span><span class="orangeBgW">Datos</span><span class="arrow">.getBytes());</span>
+                	                  </li>
+                	                </ul>
+
+                                    <br>
+
+                                    <li>
+                                      Vaciamos la secuencia y cerramos la conexión:
+                                    </li>
+                                    <ul>
+                                      <li>
+                                        <span class="orangeBgW">os</span><span class="arrow">.flush();</span>
+                                      </li>
+                                      <li>
+                                        <span class="orangeBgW">os</span><span class="arrow">.close();</span>
+                                      </li>
+                                    </ul>
+
+                	              </ul>
+
+                	              <div class="p-4 mb-4 panelCode">
+                	                <code>
+                	                       <span class="variables">System.</span><span class="new">out</span><span class="variables">.println(</span><span class="orange">Datos</span><span class="variables">);</span>
+                                        <br>
+                                            <span class="variables">URL </span><span class="orange">obj </span><span class="variables">= </span><span class="purple">new </span><span class="variables">URL(</span><span class="new">"https://hpp.sandbox.addonpayments.com/pay"</span><span class="variables">);</span>
+                                        <br>
+                                            <span class="variables">HttpURLConnection </span><span class="orange">postConnection </span><span class="variables">= (HttpURLConnection) </span><span class="orange">obj</span><span class="variables">.openConnection();</span>
+                                        <br>
+                                            <span class="orange">postConnection</span><span class="variables">.setRequestMethod(</span><span class="new">"POST"</span><span class="variables">);</span>
+                                        <br>
+                                            <span class="orange">postConnection</span><span class="variables">.setRequestProperty(</span><span class="new">"Content-Type"</span><span class="variables">, </span><span class="new">"application/json"</span><span class="variables">);</span>
+                                        <br>
+                                            <span class="orange">postConnection</span><span class="variables">.setDoOutput(</span><span class="purple">true</span><span class="variables">);</span>
+                                        <br>
+                                            <span class="variables">OutputStream </span><span class="orange">os </span><span class="variables">= </span><span class="orange">postConnection</span><span class="variables">.getOutputStream();</span>
+                                        <br>
+                                            <span class="orange">os</span><span class="variables">.write(</span><span class="orange">Datos</span><span class="variables">.getBytes());</span>
+                                        <br>
+                                            <span class="orange">os</span><span class="variables">.flush();</span>
+                                        <br>
+                                            <span class="orange">os</span><span class="variables">.close();</span>
+                	                </code>
+                	            </div>
+
+                                <hr>
+
+                                <h5 id="respuestaPay" class="mt-3">
+                                    2.3 Respuesta
+                                </h5>
+
+                                  <p>
+                                    Una vez realizada la petición a los servidores de Addon Payments, si los datos enviados son correctos el servidor nos devuelve un enlace el cual se puede proporcionar a los clientes para que realicen el pago.
+                                  </p>
+
+                                  <ul>
+                                    <li>
+                                       Indicamos que la variable 'responseCode' es de tipo integer:
+                                    </li>
+                                    <ul>
+                                      <li>
+                                        <span class="orangeBgW">int responseCode </span><span class="arrow">= </span><span class="orangeBgW">postConnection</span><span class="arrow">.getResponseCode();</span>
+                                      </li>
+                                    </ul>
+
+                                    <br>
+
+                                    <li>
+                                      Realizamos un 'if' y en caso de que la conexión con el servidor haya sido correcta (200), lea el contenido de la respuesta y nos lo muestre en pantalla. En caso de error indicamos un mensaje 'Conexión errónea':
+                                    </li>
+
+                                  </ul>
+
+                                  <div class="p-4 mb-4 panelCode">
+                                    <code>
+                                            <span class="comments">// Obtenemos la respuesta y la mostramos</span>
+                                        <br>
+                                            <span class="purple">int </span><span class="orange">responseCode </span><span class="variables">= </span><span class="orange">postConnection</span><span class="variables">.getResponseCode();</span>
+                                        <br>
+                                            <span class="purple">if </span><span class="variables">(</span><span class="orange">responseCode </span><span class="variables">== HttpURLConnection.</span><span class="new">HTTP_OK</span><span class="variables">) {</span>
+                                        <br>
+                                            <span class="pl-4 variables">BufferedReader </span><span class="orange">in </span><span class="variables">= </span><span class="purple">new </span><span class="variables">BufferedReader(</span><span class="purple">new </span><span class="variables">InputStreamReader(</span><span class="orange">postConnection</span><span class="variables">.getInputStream()));</span>
+                                        <br>
+                                            <span class="pl-4 variables">String </span><span class="orange">inputLine</span><span class="variables">;</span>
+                                        <br>
+                                            <span class="pl-4 variables">StringBuffer </span><span class="orange">response </span><span class="variables">= </span><span class="purple">new </span><span class="variables">StringBuffer();</span>
+                                        <br>
+                                        <br>
+                                            <span class="pl-4 purple">while </span><span class="variables">((</span><span class="orange">inputLine</span><span class="variables">= </span><span class="orange">in</span><span class="variables">.readLine()) != </span><span class="purple">null</span><span class="variables">) {</span>
+                                        <br>
+                                            <span class="pl-6 orange">response</span><span class="variables">.append(</span><span class="orange">inputLine</span><span class="variables">);</span>
+                                        <br>
+                                            <span class="pl-4 variables">}</span>
+                                        <br>
+                                        <br>
+                                            <span class="pl-4 orange">in</span><span class="variables">.close();</span>
+                                        <br>
+                                        <br>
+                                            <span class="comments pl-4">// Mostramos la respuesta del servidor</span>
+                                        <br>
+                                            <span class="pl-4 variables">System.</span><span class="new">out</span><span class="variables">.println(</span><span class="orange">response</span><span class="variables">.toString());</span>
+                                        <br>
+                                        <br>
+                                            <span class="variables">} </span><span class="purple">else </span><span class="variables">{</span>
+                                        <br>
+                                            <span class="comments pl-4">// En caso de error mostramos el mensaje</span>
+                                        <br>
+                                            <span class="pl-4 variables">System.</span><span class="new">out</span><span class="variables">.println(</span><span class="new">"Conexión errónea"</span><span class="variables">);</span>
+                                        <br>
+                                            <span class="variables">}</span>
+                                    </code>
+                                </div>
+                	        </div>            
+                	    </div>
+                	    <!-- Fin punto 2 -->
+            	   
+                    </div>
+                    <!-- /Contenido común -->
+
+                </div>
+            </div>
+        </div>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        <script src="../../../../assets/js/barraprogreso.js"></script>
+
+    </body>
+</html>

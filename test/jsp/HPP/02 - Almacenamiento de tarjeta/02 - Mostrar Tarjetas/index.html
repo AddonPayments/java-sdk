@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="author" content="Víctor Cantera">
+        <link rel="icon" href="../../../../assets/img/comercia_ico.png" type="image/x-icon"/ >
+        <title>Mostrar tarjetas (HPP) - SDK JAVA</title>
+
+        <!-- Bootstrap 4.3.1 -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+        <!-- CSS -->
+        <link rel="stylesheet" href="../../../../assets/css/style.css">
+
+        <!-- Script para comprobar los datos de la tarjeta mediante HPP -->
+        <script src="../../../../assets/js/rxp-hpp.js"></script> <!-- Available at https://github.com/realexpayments -->    
+    </head>
+    <body>
+        <!-- NAVBAR -->
+        <nav class="navbar navbar-expand-lg navbar-light navbar-rpdc mb-3">
+            <a class="navbar-brand">
+                <img src="../../../../assets/img/log2.svg" width="30" height="30" class="img-fluid" alt="Logo Addon Payments">
+                <span class="addonNav">ADDON</span> <span>PAYMENTS</span>
+                <span class="d-none d-sm-none d-lg-inline d-xl-inline sdkNav">
+                    <span>
+                        /SDK
+                        <span class="barraNav">_</span>
+                        de
+                        <span class="barraNav">_</span>
+                        JAVA
+                    </span>
+                </span>
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+          </a>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto pl-2 pr-2">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link pl-2 dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          Inicio
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item pl-2" href="../../../../index.html">Índice</a>
+                            <a class="dropdown-item pl-2" href="../../../errores.html">Errores de Addon Payments</a>
+                            <a class="dropdown-item pl-2" href="../../../informe.html">Convertir informe</a>
+                        </div>
+                    </li>
+                    <li class="nav-item ml-1 dropdown">
+                        <a class="nav-link pl-2 dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Pagos con tarjeta
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            <div class="dropdown-header text-center p-0">API</div>
+                            <hr class="m-0 p-0">
+                                <a class="dropdown-item pl-2" href="../../../API/01%20-%20Pagos%20con%20tarjeta/01%20-%20Autorización/index.html">Autorización</a>
+                                <a class="dropdown-item pl-2" href="../../../API/01%20-%20Pagos%20con%20tarjeta/02%20-%20OTB/index.html">OTB</a>
+                                <a class="dropdown-item pl-2" href="../../../API/01%20-%20Pagos%20con%20tarjeta/03%20-%20Credit/index.html">Credit</a>
+                            <hr class="m-0 p-0">
+                            <div class="dropdown-header text-center p-0">HPP</div>
+                            <hr class="m-0 p-0">
+                                <a class="dropdown-item pl-2" href="../../01%20-%20Pagos%20con%20tarjeta/01%20-%20Autorizacion/index.html">Autorización</a>
+                                <a class="dropdown-item pl-2" href="../../01%20-%20Pagos%20con%20tarjeta/02%20-%20OTB/index.html">OTB</a>
+                                <a class="dropdown-item pl-2" href="../../01%20-%20Pagos%20con%20tarjeta/03%20-%20Pay%20By%20Link/index.html">Pay By Link</a>
+                        </div>
+                    </li>
+                    <li class="nav-item ml-1 dropdown">
+                        <a class="nav-link pl-2 dropdown-toggle active" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Almacenamiento de tarjeta
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            <div class="dropdown-header text-center p-0">API</div>
+                            <hr class="m-0 p-0">
+                                <a class="dropdown-item pl-2" href="../../../API/02%20-%20Almacenamiento%20de%20tarjeta/01%20-%20Crear%20un%20cliente/index.html">Crear un cliente</a>
+                                <a class="dropdown-item pl-2" href="../../../API/02%20-%20Almacenamiento%20de%20tarjeta/02%20-%20Almacenar%20una%20tarjeta/index.html">Almacenar una tarjeta</a>
+                                <a class="dropdown-item pl-2" href="../../../API/02%20-%20Almacenamiento%20de%20tarjeta/03%20-%20Editar%20tarjeta/index.html">Editar tarjetas</a>
+                                <a class="dropdown-item pl-2" href="../../../API/02%20-%20Almacenamiento%20de%20tarjeta/04%20-%20Eliminar%20tarjeta/index.html">Eliminar tarjetas</a>
+                                <a class="dropdown-item pl-2" href="../../../API/02%20-%20Almacenamiento%20de%20tarjeta/05%20-%20Auth/index.html">Autorización</a>
+                                <a class="dropdown-item pl-2" href="../../../API/02%20-%20Almacenamiento%20de%20tarjeta/06%20-%20Credit/index.html">Credit</a>
+                            <hr class="m-0 p-0">
+                            <div class="dropdown-header text-center p-0">HPP</div>
+                            <hr class="m-0 p-0">
+                                <a class="dropdown-item pl-2" href="../../02%20-%20Almacenamiento%20de%20tarjeta/01%20-%20Crear%20un%20cliente/index.html">Crear un cliente</a>
+                                <a class="dropdown-item pl-2 active" href="#">Mostrar tarjetas</a>
+                        </div>
+                    </li>
+
+                    <li class="nav-item ml-1 dropdown">
+                        <a class="nav-link pl-2 dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Gestión de transacciones
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item pl-2" href="../../../API/03%20-%20Gestión%20de%20transacciones/01%20-%20Capturar/index.html">Settle (Capturar)</a>
+                            <a class="dropdown-item pl-2" href="../../../API/03%20-%20Gestión%20de%20transacciones/02%20-%20Rebate/index.html">Rebate (Devolución)</a>
+                            <a class="dropdown-item pl-2" href="../../../API/03%20-%20Gestión%20de%20transacciones/03%20-%20Void/index.html">Void (Anular transacción)</a>
+                        </div>
+                    </li>
+
+                    <li class="nav-item ml-1 dropdown">
+                        <a class="nav-link pl-2 dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Filtro de fraude
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            
+                            <div class="dropdown-header text-center p-0">API</div>
+                            <hr class="m-0 p-0">
+                                <a class="dropdown-item pl-2"  href="../../../API/05%20-%20Fraud%20Management/01%20-%20Fraud%20Filter/index.html">Filtro de fraude</a>
+                                <a class="dropdown-item pl-2"  href="../../../API/05%20-%20Fraud%20Management/02%20-%20Address%20Verification">Verificación de dirección</a>
+                                <a class="dropdown-item pl-2"  href="../../../API/05%20-%20Fraud%20Management/03%20-%20Hold">Retener transacción</a>
+                                <a class="dropdown-item pl-2"  href="../../../API/05%20-%20Fraud%20Management/04%20-%20Lanzamiento">Lanzar transacción</a>
+                            <hr class="m-0 p-0">
+                            <div class="dropdown-header text-center p-0">HPP</div>
+                            <hr class="m-0 p-0">
+                                <a class="dropdown-item pl-2"  href="../../03%20-%20Fraud%20Management/01%20-%20Fraud%20Filter/index.html">Filtro de fraude</a>
+                        </div>
+                    </li>
+
+                    <li class="nav-item ml-1 dropdown">
+                        <a class="nav-link pl-2 dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            DCC
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            <div class="dropdown-header text-center p-0">API</div>
+                            <hr class="m-0 p-0">
+                                <a class="dropdown-item pl-2"  href="../../../API/04%20-%20DCC/01%20-%20Comprobar%20DCC/index.html">Comprobar DCC</a>
+                            <hr class="m-0 p-0">
+                            <div class="dropdown-header text-center p-0">HPP</div>
+                            <hr class="m-0 p-0">
+                                <a class="dropdown-item pl-2"href="../../04%20-%20DCC/index.html">Operación con DCC</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <!-- /NAVBAR -->
+
+        <div class="col-lg-12"> 
+            <div id="contenidoComun" class="container-fluid">
+                <div class="row">
+
+                    <!-- Menú lateral -->
+                    <div class="col-lg-2 sticky-top d-none d-sm-none d-lg-block d-xl-block MenuLateral">
+
+                        <!-- Barra de progreso -->
+                        <div class="progress-bar" id="progreso"></div>
+                        <!-- /Barra de progreso -->
+                        
+                        <nav class="navbar sticky-top navbar-light" style="padding: 0px;">
+                            <nav class="nav nav-pills flex-column">
+                                <a class="nav-link" href="#editCard">1. Editar y mostrar tarjetas</a>
+                                <nav class="nav nav-pills flex-column">
+                                    <a class="nav-link ml-3 my-1" href="#codigoEjemplo">1.1 Código de ejemplo</a>
+                                </nav>
+                                <a class="nav-link" href="#descripciones">2. Descripciones</a>
+                                <nav class="nav nav-pills flex-column">
+                                    <a class="nav-link ml-3 my-1" id="#ConfigTerminal" href="#ConfigTerminal">2.1 Configuración del terminal</a>
+                                    <a class="nav-link ml-3 my-1" id="#cardStorage" href="#cardStorage">2.2 Card Storage</a>
+                                    <a class="nav-link ml-3 my-1" id="#envioOP" href="#envioOP">2.3 Envío de la operación</a>
+                                </nav>
+                            </nav>
+                        </nav>
+                    </div>
+
+                    <div class="col-lg-10" >
+                        <!-- Punto 1 -->
+                        <div class="contenedor">
+                            <div class="pl-3 pt-3 pr-3 pb-4 mb-3 text-justify">
+                                <h3 id="editCard" class="titulo">
+                                    1. Editar y mostrar tarjetas
+                                </h3>
+                                <hr>
+
+                                <p>
+                                   Una vez que hayamos creado a nuestro cliente, para futuras transacciones ahora podemos enviar esta referencia de Pagador al HPP que les presentará todas sus tarjetas almacenadas. Pueden elegir continuar con una tarjeta almacenada previamente o usar una nueva tarjeta. La transacción se procesa normalmente utilizando los servicios que haya habilitado; 3D Secure, Fraud Management, DCC, etc. Si eligen pagar con una nueva tarjeta, esto también se puede guardar a través del HPP en Almacenamiento de tarjeta para uso futuro.
+                                </p>
+
+                                <p>
+                                    Si una tarjeta guardada ha caducado o vence (dentro de los 3 meses), el cliente tendrá la opción de actualizar la fecha de caducidad o eliminar la tarjeta. Las referencias de las tarjetas editadas o eliminadas también se devolverán en la respuesta.
+                                </p>
+
+                                <h5 style="" class="pt-3" id="codigoEjemplo">
+                                    1.1 Código de ejemplo
+                                </h5>
+                                
+                                <hr>
+
+                                <div class="p-4 panelCode">
+                                    <code>
+                                            <span class="comments">// Importamos las clases necesarias para realizar las peticiones</span>
+                                        <br>
+                                            <span class="purple">import </span><span class="variables">java.math.BigDecimal</span><span class="new">;</span>
+                                        <br>
+                                        <br>
+                                            <span class="purple">import </span><span class="variables">org.junit.Test</span><span class="new">;</span>
+                                        <br>
+                                        <br>
+                                            <span class="purple">import </span><span class="variables">com.global.api.entities.HostedPaymentData</span><span class="new">;</span>
+                                        <br>
+                                            <span class="purple">import </span><span class="variables">com.global.api.entities.enums.HppVersion</span><span class="new">;</span>
+                                        <br>
+                                            <span class="purple">import </span><span class="variables">com.global.api.entities.exceptions.ApiException</span><span class="new">;</span>
+                                        <br>
+                                            <span class="purple">import </span><span class="variables">com.global.api.serviceConfigs.HostedPaymentConfig</span><span class="new">;</span>
+                                        <br>
+                                            <span class="purple">import </span><span class="variables">com.global.api.services.HostedService</span><span class="new">;</span>
+                                        <br>
+                                            <span class="purple">import </span><span class="variables">com.global.api.serviceConfigs.GatewayConfig</span><span class="new">;</span>
+                                        <br>
+                                        <br>
+                                            <span class="comments">// Configuramos el cliente y los ajustes de la petición</span>
+                                        <br>
+                                            <span class="purple">public class </span><span class="variables">Addon {</span>
+                                        <br>
+                                        <br>
+                                            <span class="pl-3 purple">private </span><span class="variables">HostedPaymentData </span><span class="new">hostedPaymentData;</span>
+                                        <br>
+                                        <br>
+                                            <span class="pl-3 purple">private </span><span class="variables">HostedService </span><span class="new">service;</span>
+                                        <br>
+                                        <br>
+                                            <span class="pl-3 purple">private </span><span class="variables">HostedPaymentConfig </span><span class="new">hostedPaymentConfig;</span>
+                                        <br>
+                                        <br>
+                                            <span class="pl-3 purple">private </span><span class="variables">String </span><span class="new">hppJson;</span>
+                                        <br>
+                                        <br>
+                                            <span class="pl-3 purple">public </span><span class="variables">Addon() </span><span class="purple">throws </span><span class="variables">ApiException {</span>
+                                        <br>
+                                            <span class="pl-5 variables">GatewayConfig </span><span class="orange">config </span><span class="new">= new </span><span class="variables">GatewayConfig();</span>
+                                        <br>
+                                            <span class="pl-5 orange">config.</span><span class="variables">setMerchantId(</span><span class="new">"addonjavatest"</span><span class="variables">);</span>
+                                        <br>
+                                            <span class="pl-5 orange">config.</span><span class="variables">setAccountId(</span><span class="new">"api"</span><span class="variables">);</span>
+                                        <br>
+                                            <span class="pl-5 orange">config.</span><span class="variables">setSharedSecret(</span><span class="new">"secret"</span><span class="variables">);</span>
+                                        <br>
+                                            <span class="pl-5 orange">config.</span><span class="variables">setServiceUrl(</span><span class="new">"https://hpp.sandbox.addonpayments.com/pay"</span><span class="variables">);</span>
+                                        <br>
+                                        <br>
+                                            <span class="pl-5 comments">// Creamos el objeto de "hostedPaymentConfig"</span>
+                                        <br>
+                                            <span class="pl-5 new">hostedPaymentConfig </span><span class="variables">= </span><span class="purple">new </span><span class="variables">HostedPaymentConfig();</span>
+                                        <br>
+                                            <span class="pl-5 new">hostedPaymentConfig</span><span class="variables">.setVersion(HppVersion.</span><span class="new">Version2</span><span class="variables">);</span>
+                                        <br>
+                                            <span class="pl-5 new">hostedPaymentConfig</span><span class="variables">.setCardStorageEnabled(</span><span class="new">true</span><span class="variables">);</span>
+                                        <br>
+                                            <span class="pl-5 orange">config</span><span class="variables">.setHostedPaymentConfig(</span><span class="new">hostedPaymentConfig</span><span class="variables">);</span>
+                                        <br>
+                                        <br>
+                                            <span class="pl-5 new">service  </span><span class="variables">= </span><span class="purple">new </span><span class="variables">HostedService(</span><span class="orange">config</span><span class="variables">);</span>
+                                        <br>
+                                        <br>
+                                            <span class="pl-5 comments">// Creamos el objeto de "HostedPaymentData"</span>
+                                        <br>
+                                            <span class="pl-5 new">hostedPaymentData </span><span class="variables">= </span><span class="purple">new </span><span class="variables">HostedPaymentData();</span>
+                                        <br>
+                                            <span class="pl-5 comments">// Mostramos el check para guardar la tarjeta</span>
+                                        <br>
+                                            <span class="pl-5 new">hostedPaymentData</span><span class="variables">.setOfferToSaveCard(</span><span class="new">true</span><span class="variables">);</span>
+                                        <br>
+                                            <span class="pl-5 comments">// Indicamos que el cliente existe</span>
+                                        <br>
+                                            <span class="pl-5 new">hostedPaymentData</span><span class="variables">.setCustomerExists(</span><span class="new">true</span><span class="variables">);</span>
+                                        <br>
+                                            <span class="pl-5 comments">// Indicamos el ID del cliente existente</span>
+                                        <br>
+                                            <span class="pl-5 new">hostedPaymentData</span><span class="variables">.setCustomerKey(</span><span class="new">"376a2598-412d-4805-9f47-c177d5605853"</span><span class="variables">);</span>
+                                        <br>
+                                        <br>
+                                            <span class="pl-3 variables">}</span>
+                                        <br>
+                                        <br>
+                                            <span class="pl-3 comments">// Lanzamos la petición al servidor de Addon Payments</span>
+                                        <br>
+                                            <span class="pl-3 comments">@Test</span>
+                                        <br>
+                                            <span class="pl-3 purple">public void </span><span class="variables">Cardhpp() </span><span class="purple">throws </span><span class="variables">ApiException {</span>
+                                        <br>
+                                        <br>
+                                            <span class="pl-5 purple">try </span><span class="variables">{</span>
+                                        <br>
+                                            <span class="pl-6 comments">// Creamos un cliente</span>
+                                        <br>
+                                            <span class="pl-6 new">hppJson </span><span class="variables">= </span><span class="new">service</span><span class="variables">.charge(</span><span class="purple">new </span><span class="variables">BigDecimal(</span><span class="new">"20"</span><span class="variables">))</span>
+                                        <br>
+                                            <span class="pl-7 variables">.withCurrency(</span><span class="new">"EUR"</span><span class="variables">)</span>
+                                        <br>
+                                            <span class="pl-7 variables">.withHostedPaymentData(</span><span class="new">hostedPaymentData</span><span class="variables">)</span>
+                                        <br>
+                                            <span class="pl-7 variables">.serialize();</span>
+                                        <br>
+                                        <br>
+                                            <span class="comments pl-6">// Obtenemos la respuesta y la mostramos</span>
+                                        <br>
+                                            <span class="pl-6 variables">String </span><span class="orange">result </span><span class="variables">= </span><span class="new">"Resultado == " </span><span class="variables">+ </span><span class="orange">response</span><span class="variables">.getResponseCode(); </span><span class="comments">// 00 == Success</span>
+                                        <br>
+                                        <br>
+                                            <span class="pl-5 variables">}</span><span class="purple"> catch</span> <span class="variables">(ApiException exc) {</span>
+                                        <br>
+                                            <span class="comments pl-7">// Añada aquí su tratamiento de errores</span>
+                                        <br>
+                                            <span class="pl-7 variables">String <span class="orange">errorMessage </span><span class="variables">= </span><span class="orange">exc</span><span class="variables">.getMessage();</span>
+                                        <br>
+                                            <span class="pl-5 variables">}</span>
+                                        <br>
+                                            <span class="pl-4 variables">}</span>
+                                        <br>
+                                            <span class="variables">}</span>
+                                    </code>
+                                </div>
+                                <!-- Fin código ejemplo-->
+                            </div>
+                        </div>
+                        <!-- Fin punto 1 -->
+
+                        <!-- Punto 2 -->
+                        <div class="contenedor">
+                            <div class="pl-3 pt-3 pr-3 pb-1 mb-3 text-justify">
+                                <h3 class="pt-1" id="descripciones">
+                                    2. Descripciones
+                                </h3>
+
+                                <hr>
+
+                                <h5 id="ConfigTerminal" class="mt-3">
+                                    2.1 Configuración del terminal
+                                </h5>
+
+                                <p>
+                                   Debemos introducir los datos de configuración que se facilitan en la llamada de cualificación del soporte técnico de Addon Payments.
+                                </p>
+
+                                <ul>
+                                   <li>
+                                       Merchant_ID = Identificador del comercio.
+                                   </li>
+                                   <li>
+                                       SubAccount = Subcuenta faciltiada en la llamada de cualificación (en caso de que se envíe la operación sin subcuenta, se usará la establecida por defecto en la creación de su terminal).
+                                   </li>
+                                   <li>
+                                       Shared Secret = Contraseña de seguridad del terminal.
+                                   </li>
+                                </ul>
+                                <small class="form-text text-muted alert alert-primary">
+                                    --&gt; En caso de que le falte algún dato de los mencionados arriba, debe contactar con su soporte técnico de Addon Payments llamando al teléfono 914 353 028 (opción 2) o enviando un email al correo electrónico <a target="_blank" href="mailto:soporteaddonpayments.com">soporteaddonpayments.com</a>.
+                                </small>
+                                <div class="p-4 mb-4 panelCode">
+                                    <code>
+                                         <span class="variables">GatewayConfig </span><span class="orange">config </span><span class="new">= new </span><span class="variables">GatewayConfig();</span>
+                                        <br>
+                                            <span class="orange">config.</span><span class="variables">setMerchantId(</span><span class="new">"addonjavatest"</span><span class="variables">);</span>
+                                        <br>
+                                            <span class="orange">config.</span><span class="variables">setAccountId(</span><span class="new">"api"</span><span class="variables">);</span>
+                                        <br>
+                                            <span class="orange">config.</span><span class="variables">setSharedSecret(</span><span class="new">"secret"</span><span class="variables">);</span>
+                                        <br>
+                                            <span class="orange">config.</span><span class="variables">setServiceUrl(</span><span class="new">"https://hpp.sandbox.addonpayments.com/pay"</span><span class="variables">); </span><span class="comments">// Se debe emplear una de las siguientes URL's:</span>
+                                        <br>
+                                            <span class="comments">// Sandbox URL para el entorno de pruebas - <b>https://hpp.sandbox.addonpayments.com/pay</b>.</span>
+                                        <br>
+                                            <span class="comments">// Live URL para el entorno de producción - <b>https://hpp.addonpayments.com/pay</b>.</span>
+                                        <br>
+                                        <br>
+                                            <span class="comments">// Creamos el objeto de "hostedPaymentConfig"</span>
+                                        <br>
+                                            <span class="new">hostedPaymentConfig </span><span class="variables">= </span><span class="purple">new </span><span class="variables">HostedPaymentConfig();</span>
+                                        <br>
+                                            <span class="new">hostedPaymentConfig</span><span class="variables">.setVersion(HppVersion.</span><span class="new">Version2</span><span class="variables">);</span>
+                                        <br>
+                                            <span class="new">hostedPaymentConfig</span><span class="variables">.setCardStorageEnabled(</span><span class="new">true</span><span class="variables">);</span>
+                                        <br>
+                                            <span class="orange">config</span><span class="variables">.setHostedPaymentConfig(</span><span class="new">hostedPaymentConfig</span><span class="variables">);</span>
+                                        <br>
+                                        <br>
+                                            <span class="new">service  </span><span class="variables">= </span><span class="purple">new </span><span class="variables">HostedService(</span><span class="orange">config</span><span class="variables">);</span>
+                                    </code>
+                                </div>
+
+                                <hr>
+
+                                <h5 id="cardStorage" class="mt-3">
+                                    2.2 Card Storage
+                                </h5>
+
+                                    <p>
+                                       Para mostrar las tarjetas almacenadas, debemos enviar los siguientes parámetros:
+                                    </p>
+
+                                    <ul>
+                                        <li>
+                                            Creamos un nuevo objeto "new HostedPaymentData()":
+                                        </li>
+                                        <ul>
+                                            <li>
+                                                <span class="arrow">hostedPaymentData</span><span class="arrow"> = </span> <span class="orangeBgW">new </span><span class="arrow">HostedPaymentData();</span>
+                                            </li>
+                                        </ul>
+
+                                        <li>
+                                            Mostramos la casilla al cliente donde solicitamos que verifique si desea guardar su tarjeta: 
+                                        </li>
+                                        <ul>
+                                            <li>
+                                                <span class="arrow">hostedPaymentData</span><span class="variableBgW">.setOfferToSaveCard</span><span class="require">(</span><span class="orangeBgW">true</span><span class="arrow">);</span>
+                                            </li>
+                                        </ul>
+
+                                        <li>
+                                            Indicamos que el cliente existe:
+                                        </li>
+                                        <ul>
+                                            <li>
+                                                <span class="arrow">hostedPaymentData</span><span class="variableBgW">.setCustomerExists</span><span class="require">(</span><span class="orangeBgW">true</span><span class="arrow">);</span>
+                                            </li>
+                                        </ul>
+
+                                        <li>
+                                            Indicamos la referencia del cliente:
+                                        </li>
+                                        <ul>
+                                            <li>
+                                                <span class="arrow">hostedPaymentData</span><span class="variableBgW">.setCustomerKey</span><span class="require">(</span><span class="comentariosBgW">"376a2598-412d-4805-9f47-c177d5605853"</span><span class="arrow">);</span>
+                                            </li>
+                                        </ul>
+
+                                    </ul>
+
+                                    <div class="p-4 mb-4 panelCode">
+                                        <code>
+                                                <span class="comments">// Creamos el objeto de "HostedPaymentData"</span>
+                                            <br>
+                                                <span class="new">hostedPaymentData </span><span class="variables">= </span><span class="purple">new </span><span class="variables">HostedPaymentData();</span>
+                                            <br>
+                                                <span class="comments">// Mostramos el check para guardar la tarjeta</span>
+                                            <br>
+                                                <span class="new">hostedPaymentData</span><span class="variables">.setOfferToSaveCard(</span><span class="new">true</span><span class="variables">);</span>
+                                            <br>
+                                                <span class="comments">// Indicamos que el cliente existe</span>
+                                            <br>
+                                                <span class="new">hostedPaymentData</span><span class="variables">.setCustomerExists(</span><span class="new">true</span><span class="variables">);</span>
+                                            <br>
+                                                <span class="comments">// Indicamos el ID del cliente existente</span>
+                                            <br>
+                                                <span class="new">hostedPaymentData</span><span class="variables">.setCustomerKey(</span><span class="new">"376a2598-412d-4805-9f47-c177d5605853"</span><span class="variables">);</span>
+                                        </code>
+                                    </div>
+
+                                <hr>
+
+                                <h5 id="envioOP" class="mt-3">
+                                    2.3 Envío de la operación
+                                </h5>
+
+                                <p>
+                                    Para enviar la operación debemos emplear el modelo de excepciones "try - catch". 
+                                </p>
+
+                                <ul>
+                                    <li>
+                                        Añadimos la tarjeta al idntificador relizando un cargo de 20€: 
+                                    </li>
+                                    <ul>
+                                        <li>
+                                            <span class="variableBgW">service</span><span class="arrow">.charge(</span><span class="variableBgW">new </span><span class="arrow">Bigdecimal("</span><span class="variableBgW">20</span><span class="arrow">"))</span>
+                                        </li>
+                                    </ul>
+
+                                    <br>
+
+                                    <li>
+                                        Indicamos la moneda con la que vamos a realizar la operación: 
+                                    </li>
+                                    <ul>
+                                        <li>
+                                            <span class="arrow">.withCurrency("</span><span class="comentariosBgW">EUR</span><span class="arrow">")</span>
+                                        </li>
+                                    </ul>
+
+                                    <br>
+
+                                    <li>
+                                        Indicamos los datos de configuración de Card Storage: 
+                                    </li>
+                                    <ul>
+                                        <li>
+                                            <span class="arrow">.withHostedPaymentData(</span><span class="variableBgW">hostedPaymentData</span><span class="arrow">)</span>
+                                        </li>
+                                    </ul>
+
+                                    <br>
+
+                                    <li>
+                                        Serializamos los datos: 
+                                    </li>
+                                    <ul>
+                                        <li>
+                                            <span class="arrow">.serialize();</span>
+                                        </li>
+                                    </ul>
+
+                                </ul>
+                                <div class="p-4 mb-4 panelCode">
+                                    <code>
+                                        <span class="comments">// Lanzamos la petición al servidor de Addon Payments</span>
+                                        <br>
+                                            <span class="comments">@Test</span>
+                                        <br>
+                                            <span class="purple">public void </span><span class="variables">Cardhpp() </span><span class="purple">throws </span><span class="variables">ApiException {</span>
+                                        <br>
+                                        <br>
+                                            <span class="pl-4 purple">try </span><span class="variables">{</span>
+                                        <br>
+                                            <span class="pl-6 comments">// Creamos un cliente</span>
+                                        <br>
+                                            <span class="pl-6 new">hppJson </span><span class="variables">= </span><span class="new">service</span><span class="variables">.charge(</span><span class="purple">new </span><span class="variables">BigDecimal(</span><span class="new">"20"</span><span class="variables">))</span>
+                                        <br>
+                                            <span class="pl-7 variables">.withCurrency(</span><span class="new">"EUR"</span><span class="variables">)</span>
+                                        <br>
+                                            <span class="pl-7 variables">.withHostedPaymentData(</span><span class="new">hostedPaymentData</span><span class="variables">)</span>
+                                        <br>
+                                            <span class="pl-7 variables">.serialize();</span>
+                                        <br>
+                                        <br>
+                                            <span class="comments pl-6">// Obtenemos la respuesta y la mostramos</span>
+                                        <br>
+                                            <span class="pl-6 variables">String </span><span class="orange">result </span><span class="variables">= </span><span class="new">"Resultado == " </span><span class="variables">+ </span><span class="orange">response</span><span class="variables">.getResponseCode(); </span><span class="comments">// 00 == Success</span>
+                                        <br>
+                                        <br>
+                                            <span class="pl-4 variables">}</span><span class="purple"> catch</span> <span class="variables">(ApiException exc) {</span>
+                                        <br>
+                                            <span class="comments pl-7">// Añada aquí su tratamiento de errores</span>
+                                        <br>
+                                            <span class="pl-7 variables">String <span class="orange">errorMessage </span><span class="variables">= </span><span class="orange">exc</span><span class="variables">.getMessage();</span>
+                                        <br>
+                                            <span class="pl-4 variables">}</span>
+                                        <br>
+                                            <span class="variables">}</span>
+                                    </code>
+                                </div>
+
+                                <p class="pb-4">
+                                    Para la respuesta obtenemos en la variable 'errorMessage' el resultado de la función "<span class="arrow">getMessage()</span>".
+                                    <br>
+                                    <br>
+                                    Con esta función obtenemos el motivo de la denegación del servidor. Para ver todos los errores de denegación actualizados, puede comprobar nuestra <a target="_blank" href="https://desarrolladores.addonpayments.com/#!/technical-resources/messages">documentación de Addon Payments.</a>
+                                </p>
+
+                            </div>
+                        </div>
+                    
+                    </div>
+                    <!-- /Contenido común -->
+
+                </div>
+            </div>
+        </div>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        <script src="../../../../assets/js/barraprogreso.js"></script>
+
+    </body>
+</html>
