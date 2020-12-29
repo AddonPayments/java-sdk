@@ -405,6 +405,48 @@ public class RealexConnector extends XmlGateway implements IPaymentGateway, IRec
             if(paymentData.getAddressesMatch() != null) {
                 request.set("HPP_ADDRESS_MATCH_INDICATOR", paymentData.getAddressesMatch() ? "TRUE" : "FALSE");
             }
+            
+            // Optional Fields of 3DS2
+            request.set("HPP_CUSTOMER_PHONENUMBER_HOME", paymentData.getCustomerHomeNumber());
+            request.set("HPP_CUSTOMER_PHONENUMBER_WORK", paymentData.getCustomerWorkNumber());
+            request.set("HPP_CARDHOLDER_ACCOUNT_AGE_DATE", paymentData.getAccountAgeDate());
+            request.set("HPP_CARDHOLDER_ACCOUNT_AGE_INDICATOR", paymentData.getAccountAgeIndicator());
+            request.set("HPP_CARDHOLDER_ACCOUNT_CHANGE_DATE", paymentData.getAccountChangeDate());
+            request.set("HPP_CARDHOLDER_ACCOUNT_CHANGE_INDICATOR", paymentData.getAccountChangeIndicator());
+            request.set("HPP_CARDHOLDER_ACCOUNT_PASSWORD_CHANGE_DATE", paymentData.getAccountPassChangeDate());
+            request.set("HPP_CARDHOLDER_ACCOUNT_PASSWORD_CHANGE_INDICATOR", paymentData.getAccountPassChangeIndicator());
+            request.set("HPP_CARDHOLDER_ACCOUNT_PURCHASE_COUNT", paymentData.getAccountPurchaseCount());
+            request.set("HPP_TRANSACTION_TYPE", paymentData.getTransactionType());
+            request.set("HPP_CARDHOLDER_ACCOUNT_IDENTIFIER", paymentData.getCardholderAccountIdentifier());
+            request.set("HPP_SUSPICIOUS_ACTIVITY", paymentData.getSuspiciousActivity());
+            request.set("HPP_PROVISION_ATTEMPTS_DAY", paymentData.getProvisionAttemptsDay());
+            request.set("HPP_PAYMENT_ACCOUNT_AGE", paymentData.getPaymentAccountAge());
+            request.set("HPP_PAYMENT_ACCOUNT_AGE_INDICATOR", paymentData.getPaymentAccountAgeIndicator());
+            request.set("HPP_DELIVERY_EMAIL", paymentData.getDeliveryEmail());
+            request.set("HPP_DELIVERY_TIMEFRAME", paymentData.getDeliveryTimeframe());
+            request.set("HPP_SHIP_INDICATOR", paymentData.getShipIndicator());
+            request.set("HPP_SHIPPING_ADDRESS_USAGE", paymentData.getShippingAddressUsage());
+            request.set("HPP_SHIPPING_ADDRESS_USAGE_INDICATOR", paymentData.getShippingAddressUsageIndicator());
+            request.set("HPP_SHIPPING_NAME_INDICATOR", paymentData.getShippingNameIndicator());
+            request.set("HPP_PREORDER_DATE", paymentData.getPreorderDate());
+            request.set("HPP_PREORDER_PURCHASE_INDICATOR", paymentData.getPreorderPurchaseIndicator());
+            request.set("HPP_REORDER_ITEM_INDICATOR", paymentData.getReorderItemIndicator());
+            request.set("HPP_TRANSACTION_ACTIVITY_DAY", paymentData.getTransactionActivityDay());
+            request.set("HPP_TRANSACTION_ACTIVITY_YEAR", paymentData.getTransactionActivityYear());
+            request.set("HPP_GIFT_CARD_AMOUNT", paymentData.getGiftCardAmount());
+            request.set("HPP_GIFT_CARD_COUNT", paymentData.getGiftCardCount());
+            request.set("HPP_GIFT_CARD_CURRENCY", paymentData.getGiftCardCurrency());
+            request.set("HPP_RECURRING_MAX_INSTALLMENTS", paymentData.getRecurringMaxInstallments());
+            request.set("HPP_RECURRING_EXPIRY", paymentData.getRecurringExpiry());
+            request.set("HPP_RECURRING_FREQUENCY", paymentData.getRecurringFrequency());
+            request.set("HPP_PRIOR_TRANSACTION_AUTHENTICATION_METHOD", paymentData.getPriorTransAuthMethod());
+            request.set("HPP_PRIOR_TRANSACTION_AUTHENTICATION_IDENTIFIER", paymentData.getPriorTransAuthIdentifier());
+            request.set("HPP_PRIOR_TRANSACTION_AUTHENTICATION_TIMESTAMP", paymentData.getPriorTransAuthTimestamp());
+            request.set("HPP_PRIOR_TRANSACTION_AUTHENTICATION_DATA", paymentData.getPriorTransAuthData());
+            request.set("HPP_CARDHOLDER_LOGIN_AUTHENTICATION_TYPE", paymentData.getCardLoginAuthType());
+            request.set("HPP_CARDHOLDER_LOGIN_AUTHENTICATION_TIMESTAMP", paymentData.getCardLoginAuthTimestamp());
+            request.set("HPP_CARDHOLDER_LOGIN_AUTHENTICATION_DATA", paymentData.getCardLoginAuthData());
+            request.set("HPP_WHITELIST_STATUS", paymentData.getWhiteListStatus());
         }
 
         if (builder.getShippingAddress() != null) {

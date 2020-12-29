@@ -1,0 +1,1535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="author" content="Víctor Cantera">
+        <link rel="icon" href="../../../../assets/img/comercia_ico.png" type="image/x-icon"/ >
+        <title>Autorización (API) - SDK JAVA</title>
+
+        <!-- Bootstrap 4.3.1 -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+        <!-- CSS -->
+        <link rel="stylesheet" href="../../../../assets/css/style.css">
+
+        <!-- Script para comprobar los datos de la tarjeta mediante API -->
+        <script src="../../../../assets/js/rxp-js.js"></script> <!-- Available at https://github.com/realexpayments -->
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg navbar-light navbar-rpdc mb-3">
+        <a class="navbar-brand">
+            <img src="../../../../assets/img/log2.svg" width="30" height="30" class="img-fluid" alt="Logo Addon Payments">
+            <span class="addonNav">ADDON</span> <span>PAYMENTS</span>
+            <span class="d-none d-sm-none d-lg-inline d-xl-inline sdkNav">
+                <span>
+                    /SDK
+                    <span class="barraNav">_</span>
+                    de
+                    <span class="barraNav">_</span>
+                    JAVA
+                </span>
+            </span>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+      </a>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto pl-2 pr-2">
+                <li class="nav-item dropdown">
+                    <a class="nav-link pl-2 dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Inicio
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item pl-2" href="../../../../index.html">Índice</a>
+                        <a class="dropdown-item pl-2" href="../../../errores.html">Errores de Addon Payments</a>
+                        <a class="dropdown-item pl-2" href="../../../informe.html">Convertir informe</a>
+                    </div>
+                </li>
+                <li class="nav-item ml-1 dropdown">
+                    <a class="nav-link pl-2 dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Pagos con tarjeta
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                        <div class="dropdown-header text-center p-0">API</div>
+                        <hr class="m-0 p-0">
+                            <a class="dropdown-item pl-2" href="../../01%20-%20Pagos%20con%20tarjeta/01%20-%20Autorización/index.html">Autorización</a>
+                            <a class="dropdown-item pl-2" href="../../01%20-%20Pagos%20con%20tarjeta/02%20-%20OTB/index.html">OTB</a>
+                            <a class="dropdown-item pl-2" href="../../01%20-%20Pagos%20con%20tarjeta/03%20-%20Credit/index.html">Credit</a>
+                        <hr class="m-0 p-0">
+                        <div class="dropdown-header text-center p-0">HPP</div>
+                        <hr class="m-0 p-0">
+                            <a class="dropdown-item pl-2" href="../../../HPP/01%20-%20Pagos%20con%20tarjeta/01%20-%20Autorizacion/index.html">Autorización</a>
+                            <a class="dropdown-item pl-2" href="../../../HPP/01%20-%20Pagos%20con%20tarjeta/02%20-%20OTB/index.html">OTB</a>
+                            <a class="dropdown-item pl-2" href="../../../HPP/01%20-%20Pagos%20con%20tarjeta/03%20-%20Pay%20By%20Link/index.html">Pay By Link</a>
+                    </div>
+                </li>
+                <li class="nav-item ml-1 dropdown">
+                    <a class="nav-link pl-2 dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Almacenamiento de tarjeta
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                        <div class="dropdown-header text-center p-0">API</div>
+                        <hr class="m-0 p-0">
+                            <a class="dropdown-item pl-2" href="../../02%20-%20Almacenamiento%20de%20tarjeta/01%20-%20Crear%20un%20cliente/index.html">Crear un cliente</a>
+                            <a class="dropdown-item pl-2" href="../../02%20-%20Almacenamiento%20de%20tarjeta/02%20-%20Almacenar%20una%20tarjeta/index.html">Almacenar una tarjeta</a>
+                            <a class="dropdown-item pl-2" href="../../02%20-%20Almacenamiento%20de%20tarjeta/03%20-%20Editar%20tarjeta/index.html">Editar tarjetas</a>
+                            <a class="dropdown-item pl-2" href="../../02%20-%20Almacenamiento%20de%20tarjeta/04%20-%20Eliminar%20tarjeta/index.html">Eliminar tarjetas</a>
+                            <a class="dropdown-item pl-2" href="../../02%20-%20Almacenamiento%20de%20tarjeta/05%20-%20Auth/index.html">Autorización</a>
+                            <a class="dropdown-item pl-2" href="../../02%20-%20Almacenamiento%20de%20tarjeta/06%20-%20Credit/index.html">Credit</a>
+                        <hr class="m-0 p-0">
+                        <div class="dropdown-header text-center p-0">3DS2</div>
+                            <hr class="m-0 p-0">
+                                <a class="dropdown-item pl-2" href="../02%20-%20Card%20Storage/index.html">Comprobar versión</a>
+                                <a class="dropdown-item pl-2" href="../02%20-%20Card%20Storage/index.html#authenticationTitle">Autenticación</a>
+                                <a class="dropdown-item pl-2" href="../02%20-%20Card%20Storage/index.html#authorizationTitle">Autorización</a>
+                            <hr class="m-0 p-0">
+                        <div class="dropdown-header text-center p-0">HPP</div>
+                        <hr class="m-0 p-0">
+                            <a class="dropdown-item pl-2" href="../../../HPP/02%20-%20Almacenamiento%20de%20tarjeta/01%20-%20Crear%20un%20cliente/index.html">Crear un cliente</a>
+                            <a class="dropdown-item pl-2" href="../../../HPP/02%20-%20Almacenamiento%20de%20tarjeta/02%20-%20Mostrar%20Tarjetas/index.html">Mostrar tarjetas</a>
+                    </div>
+                </li>
+                <li class="nav-item ml-1 dropdown">
+                    <a class="nav-link pl-2 dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Gestión de transacciones
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item pl-2" href="../../03%20-%20Gestión%20de%20transacciones/01%20-%20Capturar/index.html">Settle (Capturar)</a>
+                        <a class="dropdown-item pl-2" href="../../03%20-%20Gestión%20de%20transacciones/02%20-%20Rebate/index.html">Rebate (Devolución)</a>
+                        <a class="dropdown-item pl-2" href="../../03%20-%20Gestión%20de%20transacciones/03%20-%20Void/index.html">Void (Anular transacción)</a>
+                    </div>
+                </li>
+
+                <li class="nav-item ml-1 dropdown">
+                    <a class="nav-link pl-2 dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Filtro de fraude
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                        
+                        <div class="dropdown-header text-center p-0">API</div>
+                        <hr class="m-0 p-0">
+                            <a class="dropdown-item pl-2"  href="../../05%20-%20Fraud%20Management/01%20-%20Fraud%20Filter/index.html">Filtro de fraude</a>
+                            <a class="dropdown-item pl-2"  href="../../05%20-%20Fraud%20Management/02%20-%20Address%20Verification">Verificación de dirección</a>
+                            <a class="dropdown-item pl-2"  href="../../05%20-%20Fraud%20Management/03%20-%20Hold">Retener transacción</a>
+                            <a class="dropdown-item pl-2"  href="../../05%20-%20Fraud%20Management/04%20-%20Lanzamiento">Lanzar transacción</a>
+                        <hr class="m-0 p-0">
+                        <div class="dropdown-header text-center p-0">HPP</div>
+                        <hr class="m-0 p-0">
+                            <a class="dropdown-item pl-2"  href="../../../HPP/03%20-%20Fraud%20Management/01%20-%20Fraud%20Filter/index.html">Filtro de fraude</a>
+                    </div>
+                </li>
+
+                <li class="nav-item ml-1 dropdown">
+                    <a class="nav-link pl-2 dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        DCC
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                        <div class="dropdown-header text-center p-0">API</div>
+                        <hr class="m-0 p-0">
+                            <a class="dropdown-item pl-2"  href="../../04%20-%20DCC/01%20-%20Comprobar%20DCC/index.html">Comprobar DCC</a>
+                        <hr class="m-0 p-0">
+                        <div class="dropdown-header text-center p-0">HPP</div>
+                        <hr class="m-0 p-0">
+                            <a class="dropdown-item pl-2"href="../../../HPP/04%20-%20DCC/index.html">Operación con DCC</a>
+                    </div>
+                </li>
+                <li class="nav-item ml-1 dropdown">
+                    <a class="nav-link pl-2 dropdown-toggle active" href="#" id="06-3DS2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        3DS2
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                        <div class="dropdown-header text-center p-0">API</div>
+                        <hr class="m-0 p-0">
+                            <a class="dropdown-item pl-2 active" href="#">Autorización</a>
+                        <hr class="m-0 p-0">
+                        <div class="dropdown-header text-center p-0">HPP</div>
+                        <hr class="m-0 p-0">
+                            <a class="dropdown-item pl-2" href="../../../HPP/05%20-%203DS2/01%20-%20Autorización/index.html">Autorización</a>
+                            <a class="dropdown-item pl-2" href="../../../HPP/05%20-%203DS2/02%20-%20Datos%20adicionales/index.html">Datos adicionales</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <!-- /NAVBAR -->
+
+    <div class="col-lg-12"> 
+        <div id="contenidoComun" class="container-fluid">
+            <div class="row">
+
+                <!-- Menú lateral -->
+                <div class="col-lg-2 sticky-top d-none d-sm-none d-lg-block d-xl-block MenuLateral mb-2">
+
+                    <!-- Barra de progreso -->
+                    <div class="progress-bar" id="progreso"></div>
+                    <!-- /Barra de progreso -->
+
+                    <nav class="navbar sticky-top navbar-light" style="padding: 0px;">
+                        <nav class="nav nav-pills flex-column">
+                            <a class="nav-link" href="#autorizacion">1. Autorización</a>
+                            <nav>
+                                <a class="nav-link ml-3 my-1" href="#urlNotificacion">1.0.1 URL de notificacion</a>
+                                <a class="nav-link ml-3 my-1" href="#n3DS">1.0.2 Notificación método 3DS</a>
+                                <a class="nav-link ml-3 my-1" href="#nACS">1.0.3 Notificación del desafío ACS</a>
+                            </nav>
+                            <a class="nav-link" href="#datosCliente">2. Recopilar información del dispositivo</a>
+                            <a class="nav-link" href="#comprobarVersion">3. Comprobar la versión</a>
+                            <a class="nav-link" href="#obtenerInfo">4. Obtener información del ACS</a>
+                            <a class="nav-link" href="#startAuth">5. Iniciar autenticación</a>
+                            <nav>
+                                <a class="nav-link ml-3 my-1" href="#exenciones">5.1 Exenciones</a>
+                                <a class="nav-link ml-3 my-1" href="#solicitudMuestra">5.2 Solicitud de muestra</a>
+                                <a class="nav-link ml-3 my-1" href="#adicionalFields">5.3 Campos opcionales</a>
+                            </nav>
+                            <a class="nav-link" href="#authFlujos">6. Flujos de autenticación</a>
+                            <nav>
+                                <a class="nav-link ml-3 my-1" href="#flujoSinFric">6.1 Flujo sin fricción</a>
+                                <a class="nav-link ml-3 my-1" href="#flujoConFric">6.2 Flujo con fricción</a>
+                            </nav>
+                            <a class="nav-link" href="#desafioAcs">7. Desafío ACS</a>
+                            <nav>
+                                <a class="nav-link ml-3 my-1" href="#simuladorImg">7.1 Simulador ACS</a>
+                            </nav>
+                            <a class="nav-link" href="#obtenerDatosAuth">8. Obtener datos de autenticación</a>
+                            <a class="nav-link" href="#authDocs"> 9. Autorización</a>
+                        </nav>
+                    </nav>
+                </div>
+                <!-- /Menú lateral -->
+
+                <!-- Contenido común -->
+                <div class="col-lg-10" >
+
+                    <!-- Punto 1-->
+                    <div class="contenedor">
+                        <div class="pl-3 pt-3 pr-3 pb-4 mb-3 text-justify">
+                            <h3 id="autorizacion" class="titulo">
+                                1. Autorización
+                            </h3>
+                            
+                            <hr>
+
+                            <p>
+                                Una vez capturados los datos de la tarjeta en su aplicación, puede enviarlos a Addon Payments para que se verifiquen, saneen y formateen de la forma correcta para su porterior procesamiento en nuestros servidores. Los comercios que capturan datos en su aplicación (y en su servidor) deben ser conscientes de sus <a target="_blank" href="https://www.pcisecuritystandards.org/">responsabilidades de cumplimiento de PCI DSS.</a>
+                            </p>
+                            <p class="alert alert-danger" role="alert">
+                                Recomendamos encarecidamente sanear los datos del titular de la tarjeta antes de enviarla en la solicitud. Por ejemplo, debe comprobar que el número de tarjeta es válido y que la fecha de caducidad es correcta. <a target="_blank" href="https://github.com/globalpayments/rxp-js">Nuestra biblioteca JS</a> contiene un conjunto de funciones útiles que le ayudan a procesar las solicitudes correctamente.
+                                <small class="form-text text-muted">
+                                    --> En los ejemplos de esta documentación usamos el fichero de comprobación JS rxp-js.js de RealexPayments. Podrá ver el fichero en la carpeta de "assets/js".
+                                </small>
+                            </p>
+
+                            <h5 class="pt-3" id="urlNotificacion">1.0.1 URL de notificación</h5>
+
+                            <hr>
+
+                            <p>
+                                Lo primero que debemos hacer antes de probar o implementar 3D Secure 2 es instalar y configurar los endpoints en su sitio web que recibirán notificaciones de eventos y datos del servidor de control de acceso del emisor (ACS). Debe ser capaz de aceptar HTTP POST con valores codificados en Base64url. Se utiliza en dos momentos clave durante la autenticación:
+                            </p>
+                            <ul>
+                                <li>
+                                    <b>Finalización del método 3DS:</b> Este endpoint le indica a su sitio web que el ACS ha completado la creación de perfiles del navegador. El método POST simplemente contiene el identificador único de Addon Payments para la autenticación 3D Secure (ID de transacción del servidor).
+                                </li>
+                                <br>
+                                <li>
+                                    <b>Finalización del desafío ACS:</b> Este endpoint le indica a su sitio web que el desafío presentado al cliente se ha completado. La petición POST también contiene datos clave de autenticación, incluido si el cliente se autenticó correctamente o no.
+                                </li>
+                            </ul>
+
+                            <hr>
+
+                            <h5 class="pt-3" id="n3DS">1.0.2 Notificación método 3DS</h5>
+
+                            <div class="p-4 panelCode">
+                                <code>
+                                        <span class="comments">// Los ejemplos de código que no pertenecen al SDK que se utilizan en este artículo son ejemplos simples y no deben usarse como código listo para producción.</span>
+                                    <br>    
+                                        <span class="comments">@RequestMapping("/methodUrlResponse")</span>
+                                    <br>
+                                        <span class="purple">public void</span> <span class="variables">consumeMethodUrlResponse(<span class="new">String</span> <span class="orange">threeDSMethodData</span>)</span> <span class="purple">throws</span> <span class="variables">UnsupportedEncodingException {</span>
+                                    <br>
+                                    <br>
+                                        <span class="pl-4 comments">// Lanzamos la petición al servidor de Addon Payments</span>
+                                    <br>
+                                        <span class="pl-4 purple">try</span> <span class="variables">{</span>
+                                    <br>
+                                        <span class="pl-5 new">byte[]</span> <span class="orange">decodedBytes</span> <span class="new">= Base64.<span class="variables">getDecoder</span></span><span class="variables">()</span><span class="new">.<span class="variables">decode</span></span><span class="variables">(<span class="orange">threeDSMethodData</span>);</span>
+                                    <br>
+                                        <span class="pl-5 variables">String</span> <span class="orange">methodUrlResponseString</span> <span class="require">=</span> <span class="purple">new </span><span class="variables">String</span><span class="variables">(<span class="orange">decodedBytes</span>);</span>
+                                    <br>
+                                        <span class="pl-5 variables">Gson</span> <span class="orange">gson</span> <span class="require">=</span> <span class="purple">new </span><span class="new">Gson<span class="variables">();</span></span>
+                                    <br>
+                                    <br>
+                                        <span class="pl-5 comments">// Mapear a una clase personalizada "MethodUrlResponse"</span>
+                                    <br>
+                                        <span class="pl-5 variables">MethodUrlResponse</span> <span class="orange">response</span> <span class="new">=</span> <span class="orange">gson</span><span class="variables">.fromJson</span><span class="variables">(<span class="orange">methodUrlResponseString</span>,</span> <span class="new">MethodUrlResponse.class</span><span class="variables">);</span>
+                                    <br>
+                                        <span class="pl-5 variables">String</span> <span class="orange">threeDSServerTransID</span> <span class="new">=</span> <span class="orange">response</span><span class="variables">.getThreeDSServerTransID</span><span class="variables">();</span> <span class="comments">// af65c369-59b9-4f8d-b2f6-7d7d5f5c69d5</span>
+                                    <br>
+                                    <br>
+                                        <span class="pl-4 variables">}</span><span class="purple"> catch</span> <span class="variables">(Exception e) {</span>
+                                    <br>
+                                        <span class="comments pl-5">// Añada aquí su tratamiento de errores</span>
+                                    <br>
+                                        <span class="pl-5 variables">String</span> <span class="orange">errorMessage </span><span class="variables">= </span><span class="orange">exc</span><span class="variables">.getMessage();</span>
+                                    <br>
+                                        <span class="pl-4 variables">}</span>
+                                    <br>
+                                        <span class="variables">}</span>
+                                </code>
+                            </div>
+
+                            <hr>
+
+                            <h5 class="pt-3" id="nACS">1.0.3 Notificación del desafío ACS</h5>
+                            
+                            <div class="p-4 panelCode">
+                                <code>
+                                        <span class="comments">// Los ejemplos de código que no pertenecen al SDK que se utilizan en este artículo son ejemplos simples y no deben usarse como código listo para producción.</span>
+                                    <br>    
+                                        <span class="comments">@RequestMapping("/methodUrlResponse")</span>
+                                    <br>
+                                        <span class="purple">public void</span> <span class="variables">consumeChallengeUrlResponse(<span class="comments">@RequestParam("cres")</span> <span class="new">String</span> <span class="orange">cres</span>)</span> <span class="purple">throws</span> <span class="variables">UnsupportedEncodingException {</span>
+                                    <br>
+                                    <br>
+                                        <span class="comments pl-4">// Ejemplo del resultado Challenge enviado por el ACS</span>
+                                    <br>
+                                        <span class="comments pl-4">/* String cres = "eyJ0aHJlZURTU2VydmVyVHJhbnNJRCI6ImFmNjVjMzY5LTU5YjktNGY4ZC1iMmY2LTdkN2Q1ZjVjNjlkNSIsImF"<br>
+                                            <span class="comments pl-5">+"jc1RyYW5zSUQiOiIxM2M3MDFhMy01YTg4LTRjNDUtODllOS1lZjY1ZTUwYThiZjkiLCJjaGFsbGVuZ2VDb21wbGV0a"</span>
+                                        <br>
+                                            <span class="comments pl-5">+"W9uSW5kIjoiWSIsIm1lc3NhZ2VUeXBlIjoiQ3JlcyIsIm1lc3NhZ2VWZXJzaW9uIjoiMi4xLjAiLCJ0cmFuc"</span>
+                                        <br>
+                                            <span class="comments pl-5">+"1N0YXR1cyI6IlkifQ==";</span>
+                                        <br>
+                                            <span class="comments pl-5">*/</span>
+                                    <br>
+                                    <br>
+                                        <span class="pl-4 comments">// Lanzamos la petición al servidor de Addon Payments</span>
+                                    <br>
+                                        <span class="pl-4 purple">try</span> <span class="variables">{</span>
+                                    <br>
+                                        <span class="pl-5 new">byte[]</span> <span class="orange">decodedBytes</span> <span class="new">= Base64.<span class="variables">getDecoder</span></span><span class="variables">()</span><span class="new">.<span class="variables">decode</span></span><span class="variables">(<span class="orange">cres</span>);</span>
+                                    <br>
+                                        <span class="pl-5 variables">String</span> <span class="orange">challengeUrlResponseString</span> <span class="require">=</span> <span class="purple">new </span><span class="variables">String</span><span class="variables">(<span class="orange">decodedBytes</span>);</span>
+                                    <br>
+                                        <span class="pl-5 variables">Gson</span> <span class="orange">gson</span> <span class="require">=</span> <span class="purple">new </span><span class="new">Gson<span class="variables">();</span></span>
+                                    <br>
+                                    <br>
+                                        <span class="pl-5 comments">// Mapear a una clase personalizada "ChallengeUrlResponse" la cual tendrá las variables String para cada elemento de la respuesta</span>
+                                    <br>
+                                        <span class="pl-5 variables">ChallengeUrlResponse</span> <span class="orange">challengeUrlResponse</span> <span class="new">=</span> <span class="orange">gson</span><span class="variables">.fromJson</span><span class="variables">(<span class="orange">challengeUrlResponseString</span>,</span> <span class="new">ChallengeUrlResponse.class</span><span class="variables">);</span>
+                                    <br>
+                                        <span class="pl-5 variables">String</span> <span class="orange">threeDSServerTransID</span> <span class="new">=</span> <span class="orange">challengeUrlResponse</span><span class="variables">.getThreeDSServerTransID</span><span class="variables">();</span> <span class="comments">// af65c369-59b9-4f8d-b2f6-7d7d5f5c69d5</span>
+                                    <br>
+                                        <span class="pl-5 variables">String</span> <span class="orange">acsTransId</span> <span class="new">=</span> <span class="orange">challengeUrlResponse</span><span class="variables">.getAcsTransID</span><span class="variables">();</span> <span class="comments">// 13c701a3-5a88-4c45-89e9-ef65e50a8bf9</span>
+                                    <br>
+                                        <span class="pl-5 variables">String</span> <span class="orange">challengeCompletionInd</span> <span class="new">=</span> <span class="orange">challengeUrlResponse</span><span class="variables">.getChallengeCompletionInd</span><span class="variables">();</span> <span class="comments">// Y</span>
+                                    <br>
+                                        <span class="pl-5 variables">String</span> <span class="orange">messageType</span> <span class="new">=</span> <span class="orange">challengeUrlResponse</span><span class="variables">.getMessageType</span><span class="variables">();</span> <span class="comments">// Cres</span>
+                                    <br>
+                                        <span class="pl-5 variables">String</span> <span class="orange">messageVersion</span> <span class="new">=</span> <span class="orange">challengeUrlResponse</span><span class="variables">.getMessageVersion</span><span class="variables">();</span> <span class="comments">// 2.1.0</span>
+                                    <br>
+                                        <span class="pl-5 variables">String</span> <span class="orange">transStatus</span> <span class="new">=</span> <span class="orange">challengeUrlResponse</span><span class="variables">.getTransStatus</span><span class="variables">();</span> <span class="comments">// Y</span>
+                                    <br>
+                                    <br>
+                                        <span class="pl-4 variables">}</span><span class="purple"> catch</span> <span class="variables">(Exception e) {</span>
+                                    <br>
+                                        <span class="comments pl-5">// Añada aquí su tratamiento de errores</span>
+                                    <br>
+                                        <span class="pl-5 variables">String</span> <span class="orange">errorMessage </span><span class="variables">= </span><span class="orange">exc</span><span class="variables">.getMessage();</span>
+                                    <br>
+                                        <span class="pl-4 variables">}</span>
+                                    <br>
+                                        <span class="variables">}</span>
+                                </code>
+                            </div>
+                        </div>            
+                    </div>
+                    <!-- /Punto 1-->
+
+                    <!-- Punto 2-->
+                    <div class="contenedor">
+                        <div class="pl-3 pt-3 pr-3 pb-4 mb-3 text-justify">
+                            <h3 class="pt-1" id="datosCliente">
+                                2. Recopilar información del dispositivo
+                            </h3>
+
+                            <hr>
+                            
+                            <p>
+                                En la primera solicitud para iniciar 3D Secure 2 (iniciar la autenticación) además de los detalles de facturación y envío del cliente y la información de la transacción, también debemos proporcionar los datos del navegador.
+                                 Puede recopilar estos datos independientemente del proceso de autenticación de 3D Secure, por ejemplo, cuando ingrese el cliente en su web.
+                            </p>
+                            <p class="alert alert-primary mt-4" role="alert">
+                                Algunos dispositivos pueden devolver una profundidad de color que no está en la lista de valores aceptados, en este escenario EMVCo.
+                                  La recomendación es enviar el valor más bajo más cercano, por ejemplo, si la profundidad de color devuelta por el navegador es 30, envíe 24 ya que este es el valor más bajo más cercano.
+                            </p>
+
+                            <p>
+                                En nuestros ejemplos a continuación, recopilamos tantos datos como podamos en el lado del cliente utilizando JavaScript.
+                                 Para algunas de las variables (browserLanguage, userAgent y timeZoneOffSet) también puede usar métodos del lado del servidor.
+                            </p>
+
+                            <div class="p-4 mb-4 panelCode">
+                                <code>
+                                        <span class="pl-2 new"><</span><span class="script">script</span><span class="new">></span>
+                                    <br>
+                                        <span class="pl-4 require">function </span><span class="service">gatherBrowserData</span><span class="require">() {</span>
+                                    <br>
+                                        <span class="pl-5 new">var </span><span class="variables">colorDepth</span> <span class="require">=</span> <span class="service">screen</span><span class="require">.</span><span class="variables">colorDepth</span><span class="require">;</span> <span class="comments">// 24</span>
+                                    <br>
+                                        <span class="pl-5 new">var </span><span class="variables">javaEnabled</span> <span class="require">=</span> <span class="service">navigator</span><span class="require">.</span><span class="service">javaEnabled</span><span class="require">();</span> <span class="comments">// true</span>
+                                    <br>
+                                        <span class="pl-5 new">var </span><span class="variables">browserLanguage</span> <span class="require">=</span> <span class="service">navigator</span><span class="require">.</span><span class="variables">language</span><span class="require">;</span> <span class="comments">// en_US</span>
+                                    <br>
+                                        <span class="pl-5 new">var </span><span class="variables">screenHeight</span> <span class="require">=</span> <span class="service">screen</span><span class="require">.</span><span class="variables">height</span><span class="require">;</span> <span class="comments">// 1080</span>
+                                    <br>
+                                        <span class="pl-5 new">var </span><span class="variables">screenWidth</span> <span class="require">=</span> <span class="service">screen</span><span class="require">.</span><span class="variables">width</span><span class="require">;</span> <span class="comments">// 1920</span>
+                                    <br>
+                                        <span class="pl-5 new">var </span><span class="variables">userAgent</span> <span class="require">=</span> <span class="service">navigator</span><span class="require">.</span><span class="variables">userAgent</span><span class="require">;</span>
+                                    <br>
+                                        <span class="pl-5 comments">// Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.110 Safari/537.36</span>
+                                    <br>
+                                        <span class="pl-5 new">var </span><span class="variables">browserTime</span> <span class="require">=</span> <span class="new">new </span><span class="service">Date</span><span class="require">();</span>
+                                    <br>
+                                        <span class="pl-5 new">var </span><span class="variables">browserTimezoneZoneOffset</span> <span class="require">= (</span><span class="variables">browserTime</span><span class="require">.</span><span class="service">getTimezoneOffset</span><span class="require">() / </span><span class="variables">60</span><span class="require">);</span> <span class="comments">// 0</span>
+                                    <br>
+                                        <span class="pl-4 require">}</span>
+                                    <br>
+                                    <span class="pl-2 new"><</span><span class="script">/script</span><span class="new">></span>
+                                </code>
+                            </div>
+
+                            <p>
+                                <b>Muestra del lado servidor</b>
+                            </p>
+
+                            <div class="p-4 panelCode">
+                                <code>
+                                    <span class="comments">// import javax.servlet.http.HttpServletRequest;</span>
+                                    <br>
+                                        <span class="variables">String</span> <span class="orange">customerIp</span> <span class="new">= request.</span><span class="variables">getRemoteAddr();</span> <span class="comments">// 123.123.123.123</span>
+                                    <br>
+                                        <span class="variables">String</span> <span class="orange">acceptHeader</span> <span class="new">= request.</span><span class="variables">getHeader(</span><span class="new">"accept"</span><span class="variables">);</span>
+                                    <br>
+                                        <span class="comments">// text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8</span>
+                                    <br>
+                                </code>
+                            </div>
+
+                        </div>   
+                    </div>
+                    <!-- /Punto 2 -->
+
+                    <!-- Punto 3-->
+                    <div class="contenedor">
+                        <div class="pl-3 pt-3 pr-3 pb-4 mb-3 text-justify">
+                            <h3 class="pt-1" id="comprobarVersion">
+                                3. Comprobar la versión
+                            </h3>
+
+                            <hr>
+                            
+                            <p>
+                                El primer paso es verificar la versión que admite la tarjeta. Addon Payments mantiene una base de datos actualizada de los rangos de BIN y las versiones de 3D Secure que admiten.
+                            </p>
+                            <p>
+                                Si la tarjeta está inscrita en 3D Secure 2, se devolverá la versión exacta (2.xx) junto con la URL necesaria para facilitar la recopilación de datos del dispositivo por parte del Emisor ACS (si es compatible).
+                                Si la tarjeta no está inscrita, el único valor devuelto será inscrito = falso. En este escenario, puede proceder a verificar si la tarjeta está inscrita en 3D Secure 1. <a href="https://developer.globalpay.com/api/3d-secure">Para obtener más información consulte la documentación de 3D Secure 1.</a>
+                            </p>
+
+                            <div class="p-4 panelCode">
+                                <code>
+                                        <span class="comments">// Importamos las clases necesarias realizar la comprobación</span>
+                                    <br>
+                                        <span class="purple">import </span><span class="variables">java.math.BigDecimal</span><span class="new">;</span>
+                                    <br>
+                                    <br>
+                                        <span class="purple">import </span><span class="variables">org.junit.Test</span><span class="new">;</span>
+                                    <br>
+                                    <br>
+                                        <span class="purple">import </span><span class="variables">com.global.api.ServicesContainer</span><span class="new">;</span>
+                                    <br>
+                                        <span class="purple">import </span><span class="variables">com.global.api.services.Secure3dService</span><span class="new">;</span>
+                                    <br>
+                                        <span class="purple">import </span><span class="variables">com.global.api.entities.exceptions.ApiException</span><span class="new">;</span>
+                                    <br>
+                                        <span class="purple">import </span><span class="variables">com.global.api.entities.enums.Secure3dVersion</span><span class="new">;</span>
+                                    <br>
+                                        <span class="purple">import </span><span class="variables">com.global.api.paymentMethods.CreditCardData</span><span class="new">;</span>
+                                    <br>
+                                        <span class="purple">import </span><span class="variables">com.global.api.serviceConfigs.GatewayConfig</span><span class="new">;</span>
+                                    <br>
+                                    <br>
+                                        <span class="comments">// Configuramos el cliente y los ajustes de la petición</span>
+                                    <br>
+                                        <span class="variables">GatewayConfig </span><span class="orange">config </span><span class="new">= new </span><span class="variables">GatewayConfig();</span>
+                                    <br>
+                                        <span class="orange">config.</span><span class="variables">setMerchantId(</span><span class="new">"addonjavatest"</span><span class="variables">);</span>
+                                    <br>
+                                        <span class="orange">config.</span><span class="variables">setAccountId(</span><span class="new">"3ds2"</span><span class="variables">);</span>
+                                    <br>
+                                        <span class="orange">config.</span><span class="variables">setSharedSecret(</span><span class="new">"secret"</span><span class="variables">);</span>
+                                    <br>
+                                        <span class="orange">config.</span><span class="variables">methodNotificationUrl(</span><span class="new">"https://dominio.com/notificacion3ds"</span><span class="variables">);</span>
+                                    <br>
+                                        <span class="orange">config.</span><span class="variables">challengeNotificationUrl(</span><span class="new">"https://dominio.com/notificacionAcs"</span><span class="variables">);</span>
+                                    <br>
+                                        <span class="orange">config.</span><span class="variables">merchantContactUrl(</span><span class="new">"https://dominio.com/about"</span><span class="variables">);</span>
+                                    <br>
+                                        <span class="orange">config.</span><span class="variables">setSecure3dVersion(Secure3dVersion.</span><span class="new">TWO</span><span class="variables">);</span>
+                                    <br>
+                                        <span class="variables">ServicesContainer.configureService(</span><span class="orange">config</span><span class="variables">);</span>
+                                    <br>
+                                    <br>
+                                        <span class="comments">// Creamos el objeto de la tarjeta</span>
+                                    <br>
+                                        <span class="comments">// Frictionless: 4263970000005262</span>
+                                    <br>
+                                        <span class="comments">// Challenge: 4012001038488884</span>
+                                    <br>
+                                        <span class="new">CreditCardData </span><span class="variables">card </span><span class="new">= </span><span class="purple">new </span><span class="variables">CreditCardData();</span>
+                                    <br>
+                                        <span class="new">card.</span><span class="variables">setNumber(</span><span class="new">"4012001038488884"</span><span class="variables">);</span>
+                                    <br>
+                                    <br>
+                                        <span class="comments">// Inicializamos la variable threeDSecureData a null</span>
+                                    <br>
+                                        <span class="new">ThreeDSecure </span><span class="variables">threeDSecureData </span><span class="new">= </span><span class="require">null</span><span class="variables">;</span>
+                                    <br>
+                                    <br>
+                                        <span class="comments">// Lanzamos la petición al servidor de Addon Payments</span>
+                                    <br>
+                                        <span class="purple">try </span><span class="variables">{</span>
+                                    <br>
+                                        <span class="pl-3 variables">threeDSecureData </span> <span class="new">= Secure3dService.</span><span class="variables">checkEnrollment(</span><span class="orange">card</span><span class="variables">)</span><span class="new">.</span><span class="variables">execute();</span>
+                                    <br>
+                                    <br>
+                                        <span class="comments pl-3">// Obtenemos la respuesta y la mostramos</span>
+                                    <br>
+                                        <span class="pl-3 variables">Boolean</span> <span class="orange">enrolled</span> <span class="new">=</span> <span class="orange">threeDSecureData</span><span class="variables">.isEnrolled</span><span class="variables">();</span> <span class="comments">// true or false</span>
+                                    <br>
+                                        <span class="pl-3 variables">String</span> <span class="orange">serverTransactionId</span> <span class="new">=</span> <span class="orange">threeDSecureData</span><span class="variables">.getServerTransactionId</span><span class="variables">();</span> <span class="comments">// af65c369-59b9-4f8d-b2f6-7d7d5f5c69d5</span>
+                                    <br>
+                                        <span class="pl-3 variables">String</span> <span class="orange">dsStartProtocolVersion</span> <span class="new">=</span> <span class="orange">threeDSecureData</span><span class="variables">.getDirectoryServerStartVersion</span><span class="variables">();</span> <span class="comments">// 2.1.0</span>
+                                    <br>
+                                        <span class="pl-3 variables">String</span> <span class="orange">dsEndProtocolVersion</span> <span class="new">=</span> <span class="orange">threeDSecureData</span><span class="variables">.getDirectoryServerEndVersion</span><span class="variables">();</span> <span class="comments">// 2.1.0</span>
+                                    <br>
+                                        <span class="pl-3 variables">String</span> <span class="orange">acsStartProtocolVersion</span> <span class="new">=</span> <span class="orange">threeDSecureData</span><span class="variables">.getAcsStartVersion</span><span class="variables">();</span> <span class="comments">// 2.1.0</span>
+                                    <br>
+                                        <span class="pl-3 variables">String</span> <span class="orange">acsEndProtocolVersion</span> <span class="new">=</span> <span class="orange">threeDSecureData</span><span class="variables">.getAcsEndVersion</span><span class="variables">();</span> <span class="comments">// 2.1.0</span>
+                                    <br>
+                                        <span class="pl-3 variables">String</span> <span class="orange">methodUrl</span> <span class="new">=</span> <span class="orange">threeDSecureData</span><span class="variables">.getIssuerAcsUrl</span><span class="variables">();</span> <span class="comments">// https://www.acsurl.com/method</span>
+                                    <br>
+                                        <span class="pl-3 variables">String</span> <span class="orange">encodedMethodData</span> <span class="new">=</span> <span class="orange">threeDSecureData</span><span class="variables">.getPayerAuthenticationRequest</span><span class="variables">();</span> <span class="comments">// Base64 encoded string</span>
+                                    <br>
+                                    <br>
+                                        <span class="variables">}</span><span class="purple"> catch</span> <span class="variables">(ApiException exc) {</span>
+                                    <br>
+                                        <span class="comments">// Añada aquí su tratamiento de errores</span>
+                                    <br>
+                                        <span class="pl-3 variables">String <span class="orange">errorMessage </span><span class="variables">= </span><span class="orange">exc</span><span class="variables">.getMessage();</span>
+                                    <br>
+                                        <span class="variables">}</span>
+                                </code>
+                            </div>
+                        </div>   
+                    </div>
+                    <!-- /Punto 3 -->
+
+                    <!-- Punto 4 -->
+                    <div class="contenedor">
+                        <div class="pl-3 pt-3 pr-3 pb-4 mb-3 text-justify">
+                            <h3 class="pt-1" id="obtenerInfo">
+                                4. Obtener la infromación
+                            </h3>
+
+                            <hr>
+                            
+                            <p>
+                                Si el Emisor ACS admite la recopilación de datos del dispositivo, en la respuesta a la verificación de versión se devolverá la URL del Método ACS.
+                                 En el lado del cliente, debemos abrir un iFrame oculto dirigido a la URL del método 3DS ACS enviando el objeto de datos del método 3DS.
+                            </p>
+                            <p>
+                                El objeto de datos del método 3DS es un objeto JSON codificado en Base64url que contiene el ID de transacción del servidor y la URL de notificación del método.
+                                 Esto se devolvió en respuesta a la verificación de la versión de 3D Secure.
+                            </p>
+                            <p>
+                                En caso de que el Emisor ACS no admita datos del dispositivo, no se devolverá la URL del método y podrá pasar al siguiente paso mientras configura el indicador de finalización del método 3DS como no disponible.
+                            </p>
+
+                            <div class="p-4 panelCode">
+                                <code>
+                                        <span class="pl-2 new"><</span><span class="script">script</span><span class="new">></span>
+                                    <br>
+                                        <span class="pl-4 require">var </span><span class="variables">form </span><span class="require">= document.</span><span class="service">createElement</span><span class="require">("</span><span class="green">form</span><span class="require">");</span>
+                                    <br>
+                                        <span class="pl-5 variables">form</span><span class="require">.</span><span class="service">setAttribute</span><span class="require">("</span><span class="green">method</span><span class="require">", "</span><span class="green">POST</span><span class="require">");</span>
+                                    <br>
+                                        <span class="pl-5 variables">form</span><span class="require">.</span><span class="service">setAttribute</span><span class="require">("</span><span class="green">action</span><span class="require">", "</span><span class="green">https://www.acsurl.com/method</span><span class="require">");</span>
+                                    <br>
+                                        <span class="pl-5 variables">form</span><span class="require">.</span><span class="service">setAttribute</span><span class="require">("</span><span class="green">id</span><span class="require">", "</span><span class="green">formIframe</span><span class="require">");</span>
+                                    <br>
+                                        <span class="pl-5 variables">form</span><span class="require">.</span><span class="service">setAttribute</span><span class="require">("</span><span class="green">target</span><span class="require">", "</span><span class="green">hidden_iframe</span><span class="require">");</span>
+                                    <br>
+                                    <br>
+                                        <span class="pl-5 require">var </span><span class="variables">threeDSMethodData </span><span class="require">= document.</span><span class="service">createElement</span><span class="require">("</span><span class="green">input</span><span class="require">");</span>
+                                    <br>
+                                        <span class="pl-5 variables">threeDSMethodData</span><span class="require">.</span><span class="service">setAttribute</span><span class="require">("</span><span class="green">type</span><span class="require">", "</span><span class="green">hidden</span><span class="require">");</span>
+                                    <br>
+                                        <span class="pl-5 variables">threeDSMethodData</span><span class="require">.</span><span class="service">setAttribute</span><span class="require">("</span><span class="green">name</span><span class="require">", "</span><span class="green">threeDSMethodData</span><span class="require">");</span>
+                                    <br>
+                                    <br>
+                                        <span class="pl-5 comments">// Añadir el JSON devuelto por Addon Payments</span>
+                                    <br>
+                                        <span class="pl-5 variables">threeDSMethodData</span><span class="require">.</span><span class="service">setAttribute</span><span class="require">("</span><span class="green">value</span><span class="require">", </span><span class="variables">threeDSmethodDataObject</span><span class="require">);</span>
+                                    <br>
+                                        <span class="pl-5 variables">form</span><span class="require">.</span><span class="service">appendChild</span><span class="require">(</span><span class="variables">threeDSMethodData</span><span class="require">);</span>
+                                    <br>
+                                        <span class="pl-5 variables">document.body.</span><span class="require">.</span><span class="service">appendChild</span><span class="require">(</span><span class="variables">form</span><span class="require">);</span>
+                                    <br>
+                                        <span class="pl-5 variables">form</span><span class="require">.</span><span class="service">submit</span><span class="require">();</span>
+                                    <br>
+                                        <span class="pl-2 new"><</span><span class="script">/script</span><span class="new">></span>
+                                </code>
+                            </div>
+
+                            <p class="pt-3">
+                                Si la URL del método ACS recopila correctamente la información del dispositivo, en el iFrame enviará un formulario POST y redirigirá el navegador a su URL de notificación. Su código del lado del cliente podrá detectar la redirección y cerrar el iFrame oculto en consecuencia.
+                                 La recopilación de datos del dispositivo debe completarse en segundos, lo que permite que su aplicación continúe con el siguiente paso, estableciendo el indicador de finalización del método 3DS en verdadero.
+                            </p>
+                            <p>
+                                Si la recopilación de información del dispositivo no tiene éxito, el tiempo de espera máximo establecido por el ACS es de 10 segundos. Sin embargo, es posible que desee continuar con el siguiente paso antes.
+                                 En este caso, su aplicación debe cerrar el iFrame dentro de su período de tiempo determinado (por ejemplo, 3 segundos) y establecer el indicador de finalización del método 3DS en Falso en la siguiente solicitud.
+                            </p>
+                        </div>   
+                    </div>
+                    <!-- /Punto 4 -->
+
+                    <!-- Punto 5 -->
+                    <div class="contenedor">
+                        <div class="pl-3 pt-3 pr-3 pb-4 mb-3 text-justify">
+                            <h3 class="pt-1" id="startAuth">
+                                5. Iniciar autenticación
+                            </h3>
+
+                            <hr>
+                            
+                            <p>
+                                Suponiendo que ya haya recopilado los datos relevantes del dispositivo y (condicionalmente) que el proceso de URL del método ACS esté completo,
+                                 su aplicación ahora puede iniciar la autenticación 3D Secure 2. A continuación, describimos los datos requeridos y recomendados que se enviarán en la petición POST al endpoint de autenticación.
+                                  Esto incluye los detalles de facturación y envío del cliente, al menos un número de teléfono, los datos del dispositivo y los detalles de la transacción (importe, moneda, etc.).
+                            </p>
+                            <p>
+                                También debe incluir la URL de notificación del ACS (1.0.3 Notificación del desafío ACS) de su aplicación, una bandera que indique el resultado de la URL del método ACS (o si tuvo lugar) y un enlace a una página
+                                 "Acerca de" o "Contacto" de su sitio web con información de atención al cliente.
+                            </p>
+
+                            <hr>
+
+                            <h5 class="pt-1" id="exenciones">
+                                5.1 Exenciones
+                            </h5>
+
+                            <p>
+                                Una de las ventajas clave de 3D Secure 2 es que proporciona un marco para que los comerciantes se beneficien de las exenciones de SCA en determinadas condiciones.
+                                 La idea detrás de estas exenciones es permitir el desarrollo de una experiencia de pago fácil de usar en circunstancias donde el riesgo es bajo.
+                            </p>
+
+                            <p>
+                                El Emisor puede aplicar exenciones en función de los detalles de la transacción o el comerciante puede solicitarlas específicamente, con el permiso de su adquirente. En el mensaje de autenticación,
+                                 puede solicitar una exención incluyéndola en el campo Indicador de solicitud de desafío (consulte la nota a continuación).
+                            </p>
+
+                            <p class="alert alert-danger" role="alert">
+                                Cuando un comercio solicita una exención, ya no podrá hacer uso de un cambio de responsabilidad en caso de una devolución de cargo.
+                                <small class="form-text text-muted">
+                                    --> Para solicitudes de exención de Mastercard, consulte también nuestra <a href="https://developer.globalpay.com/ecommerce/3d-secure-version2/message-extension#mastercard">documentación de mensajes de Mastercard.</a>
+                                </small>
+                            </p>
+
+                            <hr>
+
+                            <h5 class="pt-1" id="solicitudMuestra">
+                                5.2 Solicitud de muestra
+                            </h5>
+
+                            <p>
+                                En este ejemplo, solo estamos pasando campos obligatorios junto con algunos recomendados.
+                                 Cuantos más campos opcionales envíe y los datos que proporcione, es más probable que la autenticación de la transacción sea fluida.
+                            </p>
+
+                            <div class="p-4 panelCode">
+                                <code>
+                                        <span class="comments">// Importamos las clases necesarias iniciar la autenticación</span>
+                                    <br>
+                                        <span class="purple">import </span><span class="variables">java.math.BigDecimal</span><span class="new">;</span>
+                                    <br>
+                                    <br>
+                                        <span class="purple">import </span><span class="variables">org.junit.Test</span><span class="new">;</span>
+                                    <br>
+                                    <br>
+                                        <span class="purple">import </span><span class="variables">com.global.api.ServicesContainer</span><span class="new">;</span>
+                                    <br>
+                                        <span class="purple">import </span><span class="variables">com.global.api.services.Secure3dService</span><span class="new">;</span>
+                                    <br>
+                                        <span class="purple">import </span><span class="variables">com.global.api.entities.exceptions.ApiException</span><span class="new">;</span>
+                                    <br>
+                                        <span class="purple">import </span><span class="variables">com.global.api.entities.enums.Secure3dVersion</span><span class="new">;</span>
+                                    <br>
+                                        <span class="purple">import </span><span class="variables">com.global.api.paymentMethods.CreditCardData</span><span class="new">;</span>
+                                    <br>
+                                        <span class="purple">import </span><span class="variables">com.global.api.serviceConfigs.GatewayConfig</span><span class="new">;</span>
+                                    <br>
+                                        <span class="purple">import </span><span class="variables">com.global.api.entities.ThreeDSecure</span><span class="new">;</span>
+                                    <br>
+                                        <span class="purple">import </span><span class="variables">com.global.api.entities.Address</span><span class="new">;</span>
+                                    <br>
+                                        <span class="purple">import </span><span class="variables">com.global.api.entities.BrowserData</span><span class="new">;</span>
+                                    <br>
+                                        <span class="purple">import </span><span class="variables">com.global.api.entities.enums.ColorDepth</span><span class="new">;</span>
+                                    <br>
+                                        <span class="purple">import </span><span class="variables">com.global.api.entities.enums.AddressType</span><span class="new">;</span>
+                                    <br>
+                                        <span class="purple">import </span><span class="variables">com.global.api.entities.enums.ChallengeWindowSize</span><span class="new">;</span>
+                                    <br>
+                                        <span class="purple">import </span><span class="variables">com.global.api.entities.enums.MethodUrlCompletion</span><span class="new">;</span>
+                                    <br>
+                                    <br>
+                                        <span class="comments">// Configuramos el cliente y los ajustes de la petición</span>
+                                    <br>
+                                        <span class="variables">GatewayConfig </span><span class="orange">config </span><span class="new">= new </span><span class="variables">GatewayConfig();</span>
+                                    <br>
+                                        <span class="orange">config.</span><span class="variables">setMerchantId(</span><span class="new">"addonjavatest"</span><span class="variables">);</span>
+                                    <br>
+                                        <span class="orange">config.</span><span class="variables">setAccountId(</span><span class="new">"3ds2"</span><span class="variables">);</span>
+                                    <br>
+                                        <span class="orange">config.</span><span class="variables">setSharedSecret(</span><span class="new">"secret"</span><span class="variables">);</span>
+                                    <br>
+                                        <span class="orange">config.</span><span class="variables">methodNotificationUrl(</span><span class="new">"https://dominio.com/notificacion3ds"</span><span class="variables">);</span>
+                                    <br>
+                                        <span class="orange">config.</span><span class="variables">challengeNotificationUrl(</span><span class="new">"https://dominio.com/notificacionAcs"</span><span class="variables">);</span>
+                                    <br>
+                                        <span class="orange">config.</span><span class="variables">merchantContactUrl(</span><span class="new">"https://dominio.com/about"</span><span class="variables">);</span>
+                                    <br>
+                                        <span class="orange">config.</span><span class="variables">setSecure3dVersion(Secure3dVersion.</span><span class="new">TWO</span><span class="variables">);</span>
+                                    <br>
+                                        <span class="variables">ServicesContainer.configureService(</span><span class="orange">config</span><span class="variables">);</span>
+                                    <br>
+                                    <br>
+                                        <span class="comments">// Creamos el objeto de la tarjeta</span>
+                                    <br>
+                                        <span class="comments">// Frictionless: 4263970000005262</span>
+                                    <br>
+                                        <span class="comments">// Challenge: 4012001038488884</span>
+                                    <br>
+                                        <span class="new">CreditCardData </span><span class="variables">card </span><span class="new">= </span><span class="purple">new </span><span class="variables">CreditCardData();</span>
+                                    <br>
+                                        <span class="new">card.</span><span class="variables">setNumber(</span><span class="new">"4012001038488884"</span><span class="variables">);</span>
+                                    <br>
+                                        <span class="new">card.</span><span class="variables">setExpMonth(</span><span class="new">12</span><span class="variables">);</span>
+                                    <br>
+                                        <span class="new">card.</span><span class="variables">setExpYear(</span><span class="new">2025</span><span class="variables">);</span>
+                                    <br>
+                                        <span class="new">card.</span><span class="variables">setCvn(</span><span class="new">"123"</span><span class="variables">);</span>
+                                    <br>
+                                        <span class="new">card.</span><span class="variables">setCardHolderName(</span><span class="new">"John Doe"</span><span class="variables">);</span>
+                                    <br>
+                                    <br>
+                                        <span class="comments">// Añadimos la dirección de envío del cliente</span>
+                                    <br>
+                                        <span class="new">Address </span><span class="variables">shippingAddress </span><span class="new">= </span><span class="purple">new </span><span class="variables">Address();</span>
+                                    <br>
+                                        <span class="new">shippingAddress.</span><span class="variables">setStreetAddress1(</span><span class="new">"Dirección de envío 1"</span><span class="variables">);</span>
+                                    <br>
+                                        <span class="new">shippingAddress.</span><span class="variables">setStreetAddress2(</span><span class="new">"Dirección de envío 2"</span><span class="variables">);</span>
+                                    <br>
+                                        <span class="new">shippingAddress.</span><span class="variables">setStreetAddress3(</span><span class="new">"Dirección de envío 3"</span><span class="variables">);</span>
+                                    <br>
+                                        <span class="new">shippingAddress.</span><span class="variables">setCity(</span><span class="new">"Barcelona"</span><span class="variables">);</span>
+                                    <br>
+                                        <span class="new">shippingAddress.</span><span class="variables">setPostalCode(</span><span class="new">"03201"</span><span class="variables">);</span>
+                                    <br>
+                                        <span class="new">shippingAddress.</span><span class="variables">setCountryCode(</span><span class="new">"724"</span><span class="variables">);</span>
+                                    <br>
+                                    <br>
+                                        <span class="comments">// Añadimos la dirección de facturación del cliente</span>
+                                    <br>
+                                        <span class="new">Address </span><span class="variables">billingAddress </span><span class="new">= </span><span class="purple">new </span><span class="variables">Address();</span>
+                                    <br>
+                                        <span class="new">billingAddress.</span><span class="variables">setStreetAddress1(</span><span class="new">"Dirección de facturación 1"</span><span class="variables">);</span>
+                                    <br>
+                                        <span class="new">billingAddress.</span><span class="variables">setStreetAddress2(</span><span class="new">"Dirección de facturación 2"</span><span class="variables">);</span>
+                                    <br>
+                                        <span class="new">billingAddress.</span><span class="variables">setStreetAddress3(</span><span class="new">"Dirección de facturación 3"</span><span class="variables">);</span>
+                                    <br>
+                                        <span class="new">billingAddress.</span><span class="variables">setCity(</span><span class="new">"Barcelona"</span><span class="variables">);</span>
+                                    <br>
+                                        <span class="new">billingAddress.</span><span class="variables">setPostalCode(</span><span class="new">"03201"</span><span class="variables">);</span>
+                                    <br>
+                                        <span class="new">billingAddress.</span><span class="variables">setState(</span><span class="new">"ES"</span><span class="variables">);</span>
+                                    <br>
+                                        <span class="new">billingAddress.</span><span class="variables">setCountryCode(</span><span class="new">"724"</span><span class="variables">);</span>
+                                    <br>
+                                    <br>
+                                        <span class="comments">// Añadimos la información del navegador del cliente</span>
+                                    <br>
+                                        <span class="new">BrowserData </span><span class="variables">browserData </span><span class="new">= </span><span class="purple">new </span><span class="variables">BrowserData();</span>
+                                    <br>
+                                        <span class="new">browserData.</span><span class="variables">setAcceptHeader(</span><span class="new">"text/html,application/xhtml+xml,application/xml;q=9,image/webp,img/apng,/;q=0.8"</span><span class="variables">);</span>
+                                    <br>
+                                        <span class="new">browserData.</span><span class="variables">setColorDepth(</span><span class="new">ColorDepth.</span><span class="variables">TwentyFourBit);</span>
+                                    <br>
+                                        <span class="new">browserData.</span><span class="variables">setIpAddress(</span><span class="new">"123.123.123.123"</span><span class="variables">);</span>
+                                    <br>
+                                        <span class="new">browserData.</span><span class="variables">setJavaEnabled(</span><span class="new">true</span><span class="variables">);</span>
+                                    <br>
+                                        <span class="new">browserData.</span><span class="variables">setLanguage(</span><span class="new">"es"</span><span class="variables">);</span>
+                                    <br>
+                                        <span class="new">browserData.</span><span class="variables">setScreenHeight(</span><span class="new">1080</span><span class="variables">);</span>
+                                    <br>
+                                        <span class="new">browserData.</span><span class="variables">setScreenWidth(</span><span class="new">1920</span><span class="variables">);</span>
+                                    <br>
+                                        <span class="new">browserData.</span><span class="variables">setChallengeWindowSize(</span><span class="new">ChallengeWindowSize.</span><span class="variables">Windowed_600x400);</span>
+                                    <br>
+                                        <span class="new">browserData.</span><span class="variables">setTimezone(</span><span class="new">"0"</span><span class="variables">);</span>
+                                    <br>
+                                        <span class="new">browserData.</span><span class="variables">setUserAgent(</span><span class="new">"Mozilla/5.0 (Windows NT 6.1; Win64, x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.110 Safari/537.36"</span><span class="variables">);</span>
+                                    <br>
+                                    <br>
+                                        <span class="comments">// Indicamos el valor de setServerTransactionId devuelto anteriormente por la comprobación</span>
+                                    <br>
+                                        <span class="new">ThreeDSecure </span><span class="variables">threeDSecureData </span><span class="new">= </span><span class="purple">new </span><span class="variables">ThreeDSecure();</span>
+                                    <br>
+                                        <span class="new">threeDSecureData.</span><span class="variables">setServerTransactionId(</span><span class="new">"9de5bccf-c438-4024-8961-ec4b3cff15ff"</span><span class="variables">);</span>
+                                    <br>
+                                    <br>
+                                        <span class="comments">// Lanzamos la petición al servidor de Addon Payments</span>
+                                    <br>
+                                        <span class="purple">try </span><span class="variables">{</span>
+                                    <br>
+                                        <span class="pl-3 variables">threeDSecureData </span> <span class="new">= Secure3dService.</span><span class="variables">initiateAuthentication(</span><span class="orange">card</span><span class="variables">, </span><span class="orange">threeDSecureData</span><span class="variables">)</span>
+                                    <br>
+                                        <span class="pl-5 variables">.withAmount(</span><span class="purple">new </span><span class="variables">BigDecimal(</span><span class="new">"10.01"</span><span class="variables">))</span>
+                                    <br>
+                                        <span class="pl-5 variables">.withCurrency(</span><span class="new">"EUR"</span><span class="variables">)</span>
+                                    <br>
+                                        <span class="pl-5 variables">.withOrderCreateDate(</span><span class="new">DateTime</span><span class="variables">.parse(</span><span class="new">"2019-09-09T11:19:12"</span><span class="variables">))</span>
+                                    <br>
+                                        <span class="pl-5 variables">.withCustomerEmail(</span><span class="new">"james.mason@example.com"</span><span class="variables">)</span>
+                                    <br>
+                                        <span class="pl-5 variables">.withAddress(</span><span class="new">shippingAddress</span><span class="variables">, </span><span class="variables">AddressType.</span><span class="new">Shipping</span><span class="variables">)</span>
+                                    <br>
+                                        <span class="pl-5 variables">.withAddress(</span><span class="new">billingAddress</span><span class="variables">, </span><span class="variables">AddressType.</span><span class="new">Billing</span><span class="variables">)</span>
+                                    <br>
+                                        <span class="pl-5 variables">.withBrowserData(</span><span class="new">browserData</span><span class="variables">)</span>
+                                    <br>
+                                        <span class="pl-5 variables">.withMethodUrlCompletion(</span><span class="new">MethodUrlCompletion</span><span class="variables">.Yes)</span>
+                                    <br>
+                                        <span class="pl-5 variables">.withMobileNumber(</span><span class="new">"44"</span><span class="variables">, </span><span class="new">"7123456789"</span><span class="variables">)</span>
+                                    <br>
+                                        <span class="pl-5 variables">.execute();</span>
+                                    <br>
+                                    <br>
+                                        <span class="comments pl-3">// Obtenemos la respuesta y la mostramos</span>
+                                    <br>
+                                        <span class="pl-3 variables">String</span> <span class="orange">status</span> <span class="new">=</span> <span class="orange">threeDSecureData</span><span class="variables">.getStatus</span><span class="variables">();</span> <span class="comments">// AUTHENTICATION_SUCCESSFUL or CHALLENGE_REQUIRED</span>
+                                    <br>
+                                    <br>
+                                        <span class="variables">}</span><span class="purple"> catch</span> <span class="variables">(ApiException exc) {</span>
+                                    <br>
+                                        <span class="pl-3 comments">// Añada aquí su tratamiento de errores</span>
+                                    <br>
+                                        <span class="pl-3 variables">String <span class="orange">errorMessage </span><span class="variables">= </span><span class="orange">exc</span><span class="variables">.getMessage();</span>
+                                    <br>
+                                        <span class="variables">}</span>
+                                </code>
+                            </div>
+
+                            <hr>
+
+                            <h5 class="pt-1" id="adicionalFields">
+                                5.3 Campos opcionales
+                            </h5>
+
+                            <p>
+                                3D Secure 2 permite el envío de un conjunto de datos mucho mayor que su predecesor.
+                                 Cuantos más datos se envíen, más información tendrá el Emisor al tomar la decisión de si la autenticación de la transacción debe realizarse a través de un flujo sin fricción o de desafío.
+                            </p>
+
+                            <div class="p-4 panelCode">
+                                <code>
+                                        <span class="comments">// Importamos las clases necesarias para los datos adicionales</span>
+                                    <br>
+                                        <span class="purple">import </span><span class="variables">java.math.BigDecimal</span><span class="new">;</span>
+                                    <br>
+                                    <br>
+                                        <span class="purple">import </span><span class="variables">org.junit.Test</span><span class="new">;</span>
+                                    <br>
+                                    <br>
+                                        <span class="purple">import </span><span class="variables">com.global.api.service.Secure3dService</span><span class="new">;</span>
+                                    <br>
+                                        <span class="purple">import </span><span class="variables">com.global.api.entities.enums.Secure3dVersion</span><span class="new">;</span>
+                                    <br>
+                                        <span class="purple">import </span><span class="variables">com.global.api.entities.enums.AgeIndicator</span><span class="new">;</span>
+                                    <br>
+                                        <span class="purple">import </span><span class="variables">com.global.api.entities.enums.AuthenticationRequestType</span><span class="new">;</span>
+                                    <br>
+                                        <span class="purple">import </span><span class="variables">com.global.api.entities.enums.CustomerAuthenticationMethod</span><span class="new">;</span>
+                                    <br>
+                                        <span class="purple">import </span><span class="variables">com.global.api.entities.enums.DeliveryTimeFrame</span><span class="new">;</span>
+                                    <br>
+                                        <span class="purple">import </span><span class="variables">com.global.api.entities.enums.OrderTransactionType</span><span class="new">;</span>
+                                    <br>
+                                        <span class="purple">import </span><span class="variables">com.global.api.entities.enums.PreOrderIndicator</span><span class="new">;</span>
+                                    <br>
+                                        <span class="purple">import </span><span class="variables">com.global.api.entities.enums.PriorAuthenticationMethod</span><span class="new">;</span>
+                                    <br>
+                                        <span class="purple">import </span><span class="variables">com.global.api.entities.enums.ReorderIndicator</span><span class="new">;</span>
+                                    <br>
+                                        <span class="purple">import </span><span class="variables">com.global.api.entities.enums.ShippingMethod</span><span class="new">;</span>
+                                    <br>
+                                    <br>
+                                        <span class="comments">// Lanzamos la petición al servidor de Addon Payments con los datos opcionales</span>
+                                    <br>
+                                        <span class="variables">threeDSecureData </span> <span class="new">= Secure3dService.</span><span class="variables">initiateAuthentication(</span><span class="orange">card</span><span class="variables">, </span><span class="orange">threeDSecureData</span><span class="variables">)</span>
+                                    <br>
+                                        <span class="pl-3 variables">.withAmount(</span><span class="purple">new </span><span class="variables">BigDecimal(</span><span class="new">"10.01"</span><span class="variables">))</span>
+                                    <br>
+                                        <span class="pl-3 variables">.withCurrency(</span><span class="new">"EUR"</span><span class="variables">)</span>
+                                    <br>
+                                        <span class="pl-3 variables">.withOrderCreateDate(</span><span class="new">DateTime</span><span class="variables">.parse(</span><span class="new">"2019-09-09T11:19:12"</span><span class="variables">))</span>
+                                    <br>
+                                        <span class="pl-3 variables">.withCustomerEmail(</span><span class="new">"james.mason@example.com"</span><span class="variables">)</span>
+                                    <br>
+                                        <span class="pl-3 variables">.withAddress(</span><span class="new">shippingAddress</span><span class="variables">, </span><span class="variables">AddressType.</span><span class="new">Shipping</span><span class="variables">)</span>
+                                    <br>
+                                        <span class="pl-3 variables">.withAddress(</span><span class="new">billingAddress</span><span class="variables">, </span><span class="variables">AddressType.</span><span class="new">Billing</span><span class="variables">)</span>
+                                    <br>
+                                        <span class="pl-3 variables">.withBrowserData(</span><span class="new">browserData</span><span class="variables">)</span>
+                                    <br>
+                                        <span class="pl-3 variables">.withMethodUrlCompletion(</span><span class="new">MethodUrlCompletion</span><span class="variables">.Yes)</span>
+                                    <br>
+                                        <span class="pl-3 variables">.withMobileNumber(</span><span class="new">"34"</span><span class="variables">, </span><span class="new">"123456789"</span><span class="variables">)</span>
+                                    <br>
+                                        <span class="pl-3 comments">// Campos opcionales </span>
+                                    <br>
+                                        <span class="pl-3 variables">.withHomeNumber(</span><span class="new">"34"</span><span class="variables">, </span><span class="new">"123456789"</span><span class="variables">)</span>
+                                    <br>
+                                        <span class="pl-3 variables">.withWorkNumber(</span><span class="new">"34"</span><span class="variables">, </span><span class="new">"123456789"</span><span class="variables">)</span>
+                                    <br>
+                                        <span class="pl-3 variables">.withMerchantInitiatedRequestType(</span><span class="new">AuthenticationRequestType</span><span class="variables">.RecurringTransaction)</span>
+                                    <br>
+                                        <span class="pl-3 comments">// Información de la tarjeta regalo (consultar disponibilidad en soporte: 914353028)</span>
+                                    <br>
+                                        <span class="pl-3 variables">.withGiftCardCount(</span><span class="new">1</span><span class="variables">)</span>
+                                    <br>
+                                        <span class="pl-3 variables">.withGiftCardCurrency(</span><span class="new">"EUR"</span><span class="variables">)</span>
+                                    <br>
+                                        <span class="pl-3 variables">.withGiftCardAmount(</span><span class="purple">new </span><span class="variables">BigDecimal(</span><span class="new">"5.00"</span><span class="variables">))</span>
+                                    <br>
+                                        <span class="pl-3 comments">// Información adicional de la orden</span>
+                                    <br>
+                                        <span class="pl-3 variables">.withDeliveryEmail(</span><span class="new">"emailDelCliente@ejemplo.com"</span><span class="variables">)</span>
+                                    <br>
+                                        <span class="pl-3 variables">.withDeliveryTimeFrame(</span><span class="new">DeliveryTimeFrame</span><span class="variables">.ElectronicDelivery)</span>
+                                    <br>
+                                        <span class="pl-3 variables">.withShippingMethod(</span><span class="new">ShippingMethod</span><span class="variables">.VerifiedAddress)</span>
+                                    <br>
+                                        <span class="pl-3 variables">.withShippingNameMatchesCardHolderName(</span><span class="new">true</span><span class="variables">)</span>
+                                    <br>
+                                        <span class="pl-3 variables">.withPreOrderIndicator(</span><span class="new">PreOrderIndicator</span><span class="variables">.MerchandiseAvailable)</span>
+                                    <br>
+                                        <span class="pl-3 variables">.withPreOrderAvailabilityDate(</span><span class="new">DateTime</span><span class="variables">.parse(</span><span class="new">"2019-09-25"</span><span class="variables">))</span>
+                                    <br>
+                                        <span class="pl-3 variables">.withReorderIndicator(</span><span class="new">ReorderIndicator</span><span class="variables">.FirstTimeOrder)</span>
+                                    <br>
+                                        <span class="pl-3 variables">.withOrderTransactionType(</span><span class="new">OrderTransactionType</span><span class="variables">.GoodsAndServicesPurchase)</span>
+                                    <br>
+                                        <span class="pl-3 comments">// Información adicional del pagador</span>
+                                    <br>
+                                        <span class="pl-3 variables">.withCustomerAccountId(</span><span class="new">"6dcb24f5-74a0-4da3-98da-4f0aa0e88db3"</span><span class="variables">)</span>
+                                    <br>
+                                        <span class="pl-3 variables">.withAccountAgeIndicator(</span><span class="new">AgeIndicator</span><span class="variables">.LessThanThirtyDays)</span>
+                                    <br>
+                                        <span class="pl-3 variables">.withAccountCreateDate(</span><span class="new">DateTime</span><span class="variables">.parse(</span><span class="new">"2019-09-01"</span><span class="variables">))</span>
+                                    <br>
+                                        <span class="pl-3 variables">.withAccountChangeIndicator(</span><span class="new">AgeIndicator</span><span class="variables">.ThisTransaction)</span>
+                                    <br>
+                                        <span class="pl-3 variables">.withAccountChangeDate(</span><span class="new">DateTime</span><span class="variables">.parse(</span><span class="new">"2019-09-09"</span><span class="variables">))</span>
+                                    <br>
+                                        <span class="pl-3 variables">.withPasswordChangeIndicator(</span><span class="new">AgeIndicator</span><span class="variables">.LessThanThirtyDays)</span>
+                                    <br>
+                                        <span class="pl-3 variables">.withPasswordChangeDate(</span><span class="new">DateTime</span><span class="variables">.parse(</span><span class="new">"2019-09-05"</span><span class="variables">))</span>
+                                    <br>
+                                        <span class="pl-3 variables">.withPaymentAccountAgeIndicator(</span><span class="new">AgeIndicator</span><span class="variables">.LessThanThirtyDays)</span>
+                                    <br>
+                                        <span class="pl-3 variables">.withPaymentAccountCreateDate(</span><span class="new">DateTime</span><span class="variables">.parse(</span><span class="new">"2019-09-25"</span><span class="variables">))</span>
+                                    <br>
+                                        <span class="pl-3 variables">.withPreviousSuspiciousActivity(</span><span class="new">false</span><span class="variables">)</span>
+                                    <br>
+                                        <span class="pl-3 variables">.withNumberOfPurchasesInLastSixMonths(</span><span class="new">3</span><span class="variables">)</span>
+                                    <br>
+                                        <span class="pl-3 variables">.withNumberOfTransactionsInLast24Hours(</span><span class="new">1</span><span class="variables">)</span>
+                                    <br>
+                                        <span class="pl-3 variables">.withNumberOfTransactionsInLastYear(</span><span class="new">5</span><span class="variables">)</span>
+                                    <br>
+                                        <span class="pl-3 variables">.withNumberOfAddCardAttemptsInLast24Hours(</span><span class="new">1</span><span class="variables">)</span>
+                                    <br>
+                                        <span class="pl-3 variables">.withShippingAddressUsageIndicator(</span><span class="new">AgeIndicator</span><span class="variables">.ThisTransaction)</span>
+                                    <br>
+                                        <span class="pl-3 variables">.withShippingAddressCreateDate(</span><span class="new">DateTime</span><span class="variables">.parse(</span><span class="new">"2019-09-09"</span><span class="variables">))</span>
+                                    <br>
+                                        <span class="pl-3 comments">// Datos 3D Secure 2 Prior</span>
+                                    <br>
+                                        <span class="pl-3 variables">.withPriorAuthenticationMethod(</span><span class="new">PriorAuthenticationMethod</span><span class="variables">.FrictionlessAuthentication)</span>
+                                    <br>
+                                        <span class="pl-3 variables">.withPriorAuthenticationTransactionId(</span><span class="new">"26c3f619-39a4-4040-bf1f-6fd433e6d615"</span><span class="variables">)</span>
+                                    <br>
+                                        <span class="pl-3 variables">.withPriorAuthenticationTimestamp(</span><span class="new">DateTime</span><span class="variables">.parse(</span><span class="new">"2019-09-01T12:25:14"</span><span class="variables">))</span>
+                                    <br>
+                                        <span class="pl-3 variables">.withPriorAuthenticationData(</span><span class="new">"cKTYtrvvKU7gUoiqbbO7Po"</span><span class="variables">)</span>
+                                    <br>
+                                        <span class="pl-3 comments">// Datos de autorización recurrente</span>
+                                    <br>
+                                        <span class="pl-3 variables">.withMaxNumberOfInstallments(</span><span class="new">5</span><span class="variables">)</span>
+                                    <br>
+                                        <span class="pl-3 variables">.withRecurringAuthorizationFrequency(</span><span class="new">25</span><span class="variables">)</span>
+                                    <br>
+                                        <span class="pl-3 variables">.withRecurringAuthorizationExpiryDate(</span><span class="new">DateTime</span><span class="variables">.parse(</span><span class="new">"2020-05-25"</span><span class="variables">))</span>
+                                    <br>
+                                        <span class="pl-3 comments">// Datos login del pagador</span>
+                                    <br>
+                                        <span class="pl-3 variables">.withCustomerAuthenticationMethod(</span><span class="new">CustomerAuthenticationMethod</span><span class="variables">.MerchantSystem)</span>
+                                    <br>
+                                        <span class="pl-3 variables">.withCustomerAuthenticationTimestamp(</span><span class="new">DateTime</span><span class="variables">.parse(</span><span class="new">"2019-09-09T11:14:55"</span><span class="variables">))</span>
+                                    <br>
+                                        <span class="pl-3 variables">.execute();</span>
+                                </code>
+                            </div>
+
+                            <p class="alert alert-primary mt-4" role="alert">
+                                Puede ver la información detallada de cada propiedad en la <a target="_blank" href="https://developer.globalpay.com/api/3d-secure-two#3ds2-optional-fields">documentación oficial.</a>
+                            </p>
+
+                        </div>   
+                    </div>
+                    <!-- /Punto 5 -->
+
+                    <!-- Punto 6 -->
+                    <div class="contenedor">
+                        <div class="pl-3 pt-3 pr-3 pb-4 mb-3 text-justify">
+                            <h3 class="pt-1" id="authFlujos">
+                                6. Flujos de autenticación
+                            </h3>
+
+                            <hr>
+                            
+                            <p>
+                                En este punto, el Emisor analizará la transacción. Tendrá en cuenta factores como los datos que su aplicación ha proporcionado junto con el comportamiento histórico del cliente y el análisis de transacciones.
+                                 El resultado de este proceso determinará si el Emisor decide que el cliente debe autenticar aún más la transacción y realizar una comprobación con el ACS (flujo con fricción).
+                            </p>
+
+                            <hr>
+
+                            <h5 class="pt-1" id="flujoSinFric">
+                                6.1 Flujo sin fricción
+                            </h5>
+                            
+                            <p>
+                                En un flujo sin fricciones, el Emisor puede determinar que no se requiere ningún desafío para autenticar la transacción. O que en base a la información que ha recibido hasta ahora, la transacción no debería continuar.
+                                 Para los comerciantes europeos y las transacciones dentro del alcance de PSD2, el Emisor también verificará que se pueda aplicar una exención válida.
+                            </p>
+
+                            <p>
+                                Dependiendo del resultado y del valor de ECI relevante, su aplicación ahora puede proceder a la autorización o mostrar un mensaje al cliente indicándole que su transacción no se realizó correctamente y devolverlo a la página de pago.
+                            </p>
+
+                            <p>
+                                <b>A continuación mostramos una respuesta de autenticación exitosa.</b>
+                            </p>
+
+                            <div class="p-4 panelCode">
+                                <code>
+                                        <span class="variables">String</span> <span class="orange">status</span> <span class="new">=</span> <span class="orange">threeDSecureData</span><span class="variables">.getStatus</span><span class="variables">();</span> <span class="comments">// AUTHENTICATION_SUCCESSFUL</span>
+                                    <br>
+                                        <span class="comments">// Información requerida para la autorización o guardado de datos en bbdd</span>
+                                    <br>
+                                        <span class="variables">String</span> <span class="orange">authenticationValue</span> <span class="new">=</span> <span class="orange">threeDSecureData</span><span class="variables">.getAuthenticationValue</span><span class="variables">();</span> <span class="comments">// ODQzNjgwNjU0ZjM3N2JmYTg0NTM=</span>
+                                    <br>
+                                        <span class="variables">String</span> <span class="orange">dsTransId</span> <span class="new">=</span> <span class="orange">threeDSecureData</span><span class="variables">.getDirectoryServerTransactionId</span><span class="variables">();</span> <span class="comments">// c272b04f-6e7b-43a2-bb78-90f4fb94aa25</span>
+                                    <br>
+                                        <span class="variables">String</span> <span class="orange">messageVersion</span> <span class="new">=</span> <span class="orange">threeDSecureData</span><span class="variables">.getMessageVersion</span><span class="variables">();</span> <span class="comments">// 2.1.0</span>
+                                    <br>
+                                        <span class="variables">String</span> <span class="orange">eci</span> <span class="new">=</span> <span class="orange">threeDSecureData</span><span class="variables">.getEci</span><span class="variables">();</span> <span class="comments">// 5</span>
+                                    <br>
+                                        <span class="comments">// Datos adicionales</span>
+                                    <br>
+                                        <span class="variables">String</span> <span class="orange">acsTransId</span> <span class="new">=</span> <span class="orange">threeDSecureData</span><span class="variables">.getAcsTransactionId</span><span class="variables">();</span> <span class="comments">// 13c701a3-5a88-4c45-89e9-ef65e50a8bf9</span>
+                                    <br>
+                                        <span class="variables">String</span> <span class="orange">statusReason</span> <span class="new">=</span> <span class="orange">threeDSecureData</span><span class="variables">.getStatusReason</span><span class="variables">();</span> <span class="comments">// LOW_CONFIDENCE</span>
+                                    <br>
+                                        <span class="variables">String</span> <span class="orange">authenticationSource</span> <span class="new">=</span> <span class="orange">threeDSecureData</span><span class="variables">.getAuthenticationSource</span><span class="variables">();</span> <span class="comments">// BROWSER</span>
+                                    <br>
+                                        <span class="variables">String</span> <span class="orange">messageCategory</span> <span class="new">=</span> <span class="orange">threeDSecureData</span><span class="variables">.getMessageCategory</span><span class="variables">();</span> <span class="comments">// PAYMENT_AUTHENTICATION</span>
+                                </code>
+                            </div>
+
+                            <p class="mt-4">
+                                <b>A continuación mostramos una respuesta de autenticación fallida.</b>
+                            </p>
+
+                            <div class="p-4 panelCode">
+                                <code>
+                                        <span class="variables">String</span> <span class="orange">status</span> <span class="new">=</span> <span class="orange">threeDSecureData</span><span class="variables">.getStatus</span><span class="variables">();</span> <span class="comments">// AUTHENTICATION_FAILED</span>
+                                    <br>
+                                        <span class="variables">String</span> <span class="orange">authenticationValue</span> <span class="new">=</span> <span class="orange">threeDSecureData</span><span class="variables">.getAuthenticationValue</span><span class="variables">();</span> <span class="comments">// ODQzNjgwNjU0ZjM3N2JmYTg0NTM=</span>
+                                    <br>
+                                        <span class="variables">String</span> <span class="orange">dsTransId</span> <span class="new">=</span> <span class="orange">threeDSecureData</span><span class="variables">.getDirectoryServerTransactionId</span><span class="variables">();</span> <span class="comments">// c272b04f-6e7b-43a2-bb78-90f4fb94aa25</span>
+                                    <br>
+                                        <span class="variables">String</span> <span class="orange">messageVersion</span> <span class="new">=</span> <span class="orange">threeDSecureData</span><span class="variables">.getMessageVersion</span><span class="variables">();</span> <span class="comments">// 2.1.0</span>
+                                    <br>
+                                        <span class="variables">String</span> <span class="orange">eci</span> <span class="new">=</span> <span class="orange">threeDSecureData</span><span class="variables">.getEci</span><span class="variables">();</span> <span class="comments">// 7</span>
+                                    <br>
+                                        <span class="variables">String</span> <span class="orange">acsTransId</span> <span class="new">=</span> <span class="orange">threeDSecureData</span><span class="variables">.getAcsTransactionId</span><span class="variables">();</span> <span class="comments">// 13c701a3-5a88-4c45-89e9-ef65e50a8bf9</span>
+                                    <br>
+                                        <span class="variables">String</span> <span class="orange">statusReason</span> <span class="new">=</span> <span class="orange">threeDSecureData</span><span class="variables">.getStatusReason</span><span class="variables">();</span> <span class="comments">// CARD_AUTHENTICATION_FAILED</span>
+                                    <br>
+                                        <span class="variables">String</span> <span class="orange">authenticationSource</span> <span class="new">=</span> <span class="orange">threeDSecureData</span><span class="variables">.getAuthenticationSource</span><span class="variables">();</span> <span class="comments">// BROWSER</span>
+                                    <br>
+                                        <span class="variables">String</span> <span class="orange">messageCategory</span> <span class="new">=</span> <span class="orange">threeDSecureData</span><span class="variables">.getMessageCategory</span><span class="variables">();</span> <span class="comments">// PAYMENT_AUTHENTICATION</span>
+                                </code>
+                            </div>
+
+                            <hr>
+
+                            <h5 class="pt-1" id="flujoConFric">
+                                6.2 Flujo con fricción
+                            </h5>
+                            
+                            <p>
+                                El Emisor determina que se requiere una autenticación adicional para que la transacción continúe.
+                                 Esto puede deberse a varias razones, incluida una transacción de alto valor, un comportamiento de pago inusual para este cliente en particular (hora del día, tipo de comerciante, etc.) o no coinciden/no se han enviado datos suficientes para que tomen una determinación.
+                            </p>
+                            <p>
+                                La solución de Addon Payments formateará el del desafío con fricción y lo devolverá a su solicitud para que lo envíe al Emisor ACS.
+                                 La Solicitud de fricción está compuesta por varias variables de transacción, incluidos los identificadores para la autenticación (ID de transacción del servidor, ID de transacción de ACS y el tamaño de la ventana de fricción).
+                            </p>
+
+                            <p>
+                                Respuesta al desafío
+                            </p>
+
+                            <div class="p-4 panelCode">
+                                <code>
+                                        <span class="comments">// Información requerida para mostrar el Challenge al cliente</span>
+                                    <br>
+                                        <span class="variables">String</span> <span class="orange">challengeRequestUrl</span> <span class="new">=</span> <span class="orange">threeDSecureData</span><span class="variables">.getIssuerAcsUrl</span><span class="variables">();</span> <span class="comments">// https://test.portal.gpwebpay.com/pay-sim-gpi/sim/acs</span>
+                                    <br>
+                                        <span class="variables">String</span> <span class="orange">encodedCreq</span> <span class="new">=</span> <span class="orange">threeDSecureData</span><span class="variables">.getPayerAuthenticationRequest</span><span class="variables">();</span> <span class="comments">// String largo en Base64</span>
+                                    <br>
+                                        <span class="comments">// Datos adicionales</span>
+                                    <br>
+                                        <span class="variables">String</span> <span class="orange">authenticationType</span> <span class="new">=</span> <span class="orange">threeDSecureData</span><span class="variables">.getAuthenticationType</span><span class="variables">();</span> <span class="comments">// DYNAMIC_CHALLENGE</span>
+                                    <br>
+                                        <span class="variables">Boolean</span> <span class="orange">challengeMandated</span> <span class="new">=</span> <span class="orange">threeDSecureData</span><span class="variables">.isChallengeMandated</span><span class="variables">();</span> <span class="comments">// true</span>
+                                    <br>
+                                        <span class="variables">String</span> <span class="orange">statusReason</span> <span class="new">=</span> <span class="orange">threeDSecureData</span><span class="variables">.getStatusReason</span><span class="variables">();</span> <span class="comments">// LOW_CONFIDENCE</span>
+                                    <br>
+                                        <span class="variables">String</span> <span class="orange">authenticationSource</span> <span class="new">=</span> <span class="orange">threeDSecureData</span><span class="variables">.getAuthenticationSource</span><span class="variables">();</span> <span class="comments">// BROWSER</span>
+                                    <br>
+                                        <span class="variables">String</span> <span class="orange">messageCategory</span> <span class="new">=</span> <span class="orange">threeDSecureData</span><span class="variables">.getMessageCategory</span><span class="variables">();</span> <span class="comments">// CARD_AUTHENTICATION_FAILED</span>
+                                    <br>
+                                        <span class="variables">String</span> <span class="orange">authenticationSource</span> <span class="new">=</span> <span class="orange">threeDSecureData</span><span class="variables">.getAuthenticationSource</span><span class="variables">();</span> <span class="comments">// PAYMENT_AUTHENTICATION</span>
+                                    <br>
+                                        <span class="variables">String</span> <span class="orange">dsTransId</span> <span class="new">=</span> <span class="orange">threeDSecureData</span><span class="variables">.getDirectoryServerTransactionId</span><span class="variables">();</span> <span class="comments">// c272b04f-6e7b-43a2-bb78-90f4fb94aa25</span>
+                                    <br>    
+                                        <span class="variables">String</span> <span class="orange">acsTransId</span> <span class="new">=</span> <span class="orange">threeDSecureData</span><span class="variables">.getAcsTransactionId</span><span class="variables">();</span> <span class="comments">// 13c701a3-5a88-4c45-89e9-ef65e50a8bf9</span>
+                                    <br>
+                                        <span class="variables">String</span> <span class="orange">messageVersion</span> <span class="new">=</span> <span class="orange">threeDSecureData</span><span class="variables">.getMessageVersion</span><span class="variables">();</span> <span class="comments">// 2.1.0</span>
+                                </code>
+                            </div>
+                        </div>   
+                    </div>
+                    <!-- /Punto 6 -->
+
+                    <!-- Punto 7 -->
+                    <div class="contenedor">
+                        <div class="pl-3 pt-3 pr-3 pb-4 mb-3 text-justify">
+                            <h3 class="pt-1" id="desafioAcs">
+                                7. Desafío ACS
+                            </h3>
+
+                            <hr>
+                            
+                            <p>
+                                Para facilitar la autenticación, su aplicación/sitio web deberá abrir la URL ACS en un iFrame.
+                                 El contenido del iFrame se formateará de acuerdo con el parámetro de tamaño de la ventana de desafío indicado en la solicitud de autenticación.
+                            </p>
+
+                            <div class="p-4 panelCode">
+                                <code>
+                                        <span class="pl-2 new"><</span><span class="script">script</span><span class="new">></span>
+                                    <br>
+                                        <span class="pl-4 require">var </span><span class="variables">form </span><span class="require">= document.</span><span class="service">createElement</span><span class="require">("</span><span class="green">form</span><span class="require">");</span>
+                                    <br>
+                                        <span class="pl-5 variables">form</span><span class="require">.</span><span class="service">setAttribute</span><span class="require">("</span><span class="green">method</span><span class="require">", "</span><span class="green">POST</span><span class="require">");</span>
+                                    <br>
+                                        <span class="pl-5 variables">form</span><span class="require">.</span><span class="service">setAttribute</span><span class="require">("</span><span class="green">action</span><span class="require">", "</span><span class="green">https://www.acs.com/challenge</span><span class="require">");</span>
+                                    <br>
+                                        <span class="pl-5 variables">form</span><span class="require">.</span><span class="service">setAttribute</span><span class="require">("</span><span class="green">target</span><span class="require">", "</span><span class="green">iframe</span><span class="require">");</span>
+                                    <br>
+                                    <br>
+                                        <span class="pl-5 require">var </span><span class="variables">creqData</span> <span class="require">= document.</span><span class="service">createElement</span><span class="require">("</span><span class="green">input</span><span class="require">");</span>
+                                    <br>
+                                        <span class="pl-5 variables">threeDSMethodData</span><span class="require">.</span><span class="service">setAttribute</span><span class="require">("</span><span class="green">type</span><span class="require">", "</span><span class="green">hidden</span><span class="require">");</span>
+                                    <br>
+                                        <span class="pl-5 variables">threeDSMethodData</span><span class="require">.</span><span class="service">setAttribute</span><span class="require">("</span><span class="green">name</span><span class="require">", "</span><span class="green">creq</span><span class="require">");</span>
+                                    <br>
+                                    <br>
+                                        <span class="pl-5 comments">// Añadir el objeto "creq" obtenido del servidor</span>
+                                    <br>
+                                        <span class="pl-5 variables">creqData</span><span class="require">.</span><span class="service">setAttribute</span><span class="require">("</span><span class="green">value</span><span class="require">", </span><span class="variables">creqObject</span><span class="require">);</span>
+                                    <br>
+                                        <span class="pl-5 variables">form</span><span class="require">.</span><span class="service">appendChild</span><span class="require">(</span><span class="variables">creqData</span><span class="require">);</span>
+                                    <br>
+                                        <span class="pl-5 variables">document.body.</span><span class="require">.</span><span class="service">appendChild</span><span class="require">(</span><span class="variables">form</span><span class="require">);</span>
+                                    <br>
+                                        <span class="pl-5 variables">form</span><span class="require">.</span><span class="service">submit</span><span class="require">();</span>
+                                    <br>
+                                        <span class="pl-2 new"><</span><span class="script">/script</span><span class="new">></span>
+                                </code>
+                            </div>
+
+                            <p class="pt-3">
+                                El Emisor ACS determinará el tipo de desafío que se mostrará al cliente y se alineará con al menos dos elementos de la autenticación del cliente:
+                                <ul>
+                                    <li><b>Possession:</b> Algo que solo el cliente tiene, por ejemplo, su dispositivo móvil registrado en su banco en el que recibirá un código en un SMS.</li>
+                                    <li><b>Inherence:</b> Su huella digital u otra forma de datos biométricos.</li>
+                                    <li><b>Knowledge:</b> Una frase de contraseña única o la respuesta a una pregunta personal.</li>
+                                </ul>
+                            </p>
+                            <p>
+                                Con el cliente en el ACS, pueden ocurrir los siguientes resultados:
+                                <ul>
+                                    <li><b>La autenticación es exitosa:</b> Transaction Status = Y</li>
+                                    <li><b>La autenticación falla y el cliente no tiene otra oportunidad:</b> Transaction Status = N</li>
+                                    <li><b>La autenticación falla y el cliente tiene otra oportunidad</b></li>
+                                </ul>
+                            </p>
+                            <p>
+                                Una vez que el cliente completa el desafío (independientemente del resultado), el ACS realiza dos acciones:
+                                <ul>
+                                    <li><b>Primero:</b> Informa a Addon Payments 3DS Solution del resultado y transmite las variables de autenticación.</li>
+                                    <li><b>Segundo:</b> Al igual que con la URL del método ACS, enviará un mensaje de POST y redirigirá el navegador a su URL de notificación con el Resultado del desafío (CRes).
+                                        Su código del lado del cliente podrá detectar la redirección.</li>
+                                </ul>
+                            </p>
+                            <p>
+                                Addon Payments proporciona un simulador Emisor ACS que le permite probar diferentes resultados de desafíos.
+                            </p>
+
+                            <hr>
+
+                            <h5 id="simuladorImg">
+                                7.1 Simulador ACS
+                            </h5>
+
+                            <p>
+                                En el entorno sandbox (pruebas), Addon Payments proporciona un simulador de Emisor ACS que le permite probar diferentes resultados de desafíos.
+                            </p>
+
+                            <p>
+                                Una vez que se haya cargado el desafío, después de diez segundos, el simulador completará automáticamente la autenticación y generará una respuesta de Autenticación exitosa (transStatus = “Y”).
+                                 Esto tiene la intención de imitar un escenario en el que un cliente ha recibido una notificación en su teléfono para autenticarse usando su aplicación bancaria.
+                            </p>
+
+                            <p>
+                                Para simular una autenticación fallida, hacer clic en el botón "Cancelar" generará una respuesta fallida (transStatus = “N”).
+                                 En cualquier escenario, el resultado se enviará en el mensaje de respuesta de desafío (CRes) al punto final de notificación de desafío.
+                            </p>
+                            <div class="col-12 text-center">
+                                <img src="../../../../assets/img/3ds2ACS.png" alt="Simulador ACS">
+                            </div>
+                        </div>   
+                    </div>
+                    <!-- /Punto 7 -->
+
+                    <!-- Punto 8 -->
+                    <div class="contenedor">
+                        <div class="pl-3 pt-3 pr-3 pb-4 mb-3 text-justify">
+                            <h3 class="pt-1" id="obtenerDatosAuth">
+                                8. Obtener datos de autenticación
+                            </h3>
+
+                            <hr>
+                            
+                            <p>
+                                Si la transacción se autentica correctamente (Transaction Status = Y), el paso final antes de procesar la autorización es obtener los datos de autenticación necesarios de la solución Addon Payments 3DS.
+                                 Estos son los datos que el ACS pasó a Addon Payments cuando el cliente completó el desafío.
+                            </p>
+                            <p>
+                                Para hacer esto, llamamos al endpoint de autenticación con el ID de transacción del servidor 3DS relevante:
+                                <ul>
+                                    <li>https://api.sandbox.globalpay-ecommerce.com/3ds2/authentications/{server_trans_id}?merchant_id={merchant_id}&request_timestamp={request_timestamp}</li>
+                                </ul>
+                            </p>
+                            <p>
+                                Si el cliente canceló la transacción durante el desafío o la autenticación no procedió por otro motivo, el endpoint de resumen también le proporcionará la información disponible para que pueda actualizar su aplicación/sitio web en consecuencia.
+                            </p>
+
+                            <p>
+                                La información más importante que necesitamos para la autorización es el ECI y el valor de autenticación.
+                            </p>
+
+                            <div class="p-4 panelCode">
+                                <code>
+                                    
+                                        <span class="comments">// Importamos las clases necesarias para realizar la petición de obtención de datos</span>
+                                    <br>
+                                        <span class="purple">import </span><span class="variables">java.math.BigDecimal</span><span class="new">;</span>
+                                    <br>
+                                    <br>
+                                        <span class="purple">import </span><span class="variables">org.junit.Test</span><span class="new">;</span>
+                                    <br>
+                                    <br>
+                                        <span class="purple">import </span><span class="variables">com.global.api.ServicesContainer</span><span class="new">;</span>
+                                    <br>
+                                        <span class="purple">import </span><span class="variables">com.global.api.services.Secure3dService</span><span class="new">;</span>
+                                    <br>
+                                        <span class="purple">import </span><span class="variables">com.global.api.entities.exceptions.ApiException</span><span class="new">;</span>
+                                    <br>
+                                        <span class="purple">import </span><span class="variables">com.global.api.entities.enums.Secure3dVersion</span><span class="new">;</span>
+                                    <br>
+                                        <span class="purple">import </span><span class="variables">com.global.api.serviceConfigs.GatewayConfig</span><span class="new">;</span>
+                                    <br>
+                                    <br>
+                                        <span class="comments">// Configuramos el cliente y los ajustes de la petición</span>
+                                    <br>
+                                        <span class="variables">GatewayConfig </span><span class="orange">config </span><span class="new">= new </span><span class="variables">GatewayConfig();</span>
+                                    <br>
+                                        <span class="orange">config.</span><span class="variables">setMerchantId(</span><span class="new">"addonjavatest"</span><span class="variables">);</span>
+                                    <br>
+                                        <span class="orange">config.</span><span class="variables">setAccountId(</span><span class="new">"3ds2"</span><span class="variables">);</span>
+                                    <br>
+                                        <span class="orange">config.</span><span class="variables">setSharedSecret(</span><span class="new">"secret"</span><span class="variables">);</span>
+                                    <br>
+                                        <span class="orange">config.</span><span class="variables">methodNotificationUrl(</span><span class="new">"https://dominio.com/notificacion3ds"</span><span class="variables">);</span>
+                                    <br>
+                                        <span class="orange">config.</span><span class="variables">challengeNotificationUrl(</span><span class="new">"https://dominio.com/notificacionAcs"</span><span class="variables">);</span>
+                                    <br>
+                                        <span class="orange">config.</span><span class="variables">merchantContactUrl(</span><span class="new">"https://dominio.com/about"</span><span class="variables">);</span>
+                                    <br>
+                                        <span class="orange">config.</span><span class="variables">setSecure3dVersion(Secure3dVersion.</span><span class="new">TWO</span><span class="variables">);</span>
+                                    <br>
+                                        <span class="variables">ServicesContainer.configureService(</span><span class="orange">config</span><span class="variables">);</span>
+                                    <br>
+                                    <br>
+                                        <span class="comments">// Inicializamos la variable threeDSecureData a null</span>
+                                    <br>
+                                        <span class="new">ThreeDSecure </span><span class="variables">threeDSecureData </span><span class="new">= </span><span class="require">null</span><span class="variables">;</span>
+                                    <br>
+                                    <br>
+                                        <span class="comments">// Lanzamos la petición al servidor de Addon Payments</span>
+                                    <br>
+                                        <span class="purple">try </span><span class="variables">{</span>
+                                    <br>
+                                        <span class="pl-3 variables">threeDSecureData </span> <span class="new">= Secure3dService.</span><span class="variables">getAuthenticationData()</span>
+                                    <br>
+                                        <span class="pl-4 variables">.withServerTransactionId(</span><span class="new">"6c8c286b-9842-4c74-b298-da640da6ebbd"</span><span class="variables">)</span>
+                                    <br>
+                                        <span class="pl-4 variables">.execute();</span>
+                                    <br>
+                                    <br>
+                                        <span class="variables">}</span><span class="purple"> catch</span> <span class="variables">(ApiException exc) {</span>
+                                    <br>
+                                        <span class="comments">// Añada aquí su tratamiento de errores</span>
+                                    <br>
+                                        <span class="pl-3 variables">String <span class="orange">errorMessage </span><span class="variables">= </span><span class="orange">exc</span><span class="variables">.getMessage();</span>
+                                    <br>
+                                        <span class="variables">}</span>
+                                    <br>
+                                    <br>
+                                        <span class="comments">// Obtenemos la respuesta y la mostramos</span>
+                                    <br>
+                                        <span class="new">if </span><span class="variables">(</span><span class="orange">threeDSecureData</span> <span class="new">!=</span> <span class="require">null</span><span class="variables">) {</span>
+                                    <br>
+                                        <span class="pl-3 variables">String</span> <span class="orange">status</span> <span class="new">=</span> <span class="orange">threeDSecureData</span><span class="variables">.getStatus</span><span class="variables">();</span> <span class="comments">// AUTHENTICATION_SUCCESSFUL</span>
+                                    <br>
+                                        <span class="pl-3 comments">// Información requerida para la autorización o guardado de datos en bbdd</span>
+                                    <br>
+                                        <span class="pl-3 variables">String</span> <span class="orange">authenticationValue</span> <span class="new">=</span> <span class="orange">threeDSecureData</span><span class="variables">.getAuthenticationValue</span><span class="variables">();</span> <span class="comments">// ODQzNjgwNjU0ZjM3N2JmYTg0NTM=</span>
+                                    <br>
+                                        <span class="pl-3 variables">String</span> <span class="orange">dsTransId</span> <span class="new">=</span> <span class="orange">threeDSecureData</span><span class="variables">.getDirectoryServerTransactionId</span><span class="variables">();</span> <span class="comments">// c272b04f-6e7b-43a2-bb78-90f4fb94aa25</span>
+                                    <br>
+                                        <span class="pl-3 variables">String</span> <span class="orange">messageVersion</span> <span class="new">=</span> <span class="orange">threeDSecureData</span><span class="variables">.getMessageVersion</span><span class="variables">();</span> <span class="comments">// 2.1.0</span>
+                                    <br>
+                                        <span class="pl-3 variables">String</span> <span class="orange">eci</span> <span class="new">=</span> <span class="orange">threeDSecureData</span><span class="variables">.getEci</span><span class="variables">();</span> <span class="comments">// 5</span>
+                                    <br>
+                                        <span class="pl-3 comments">// Datos adicionales</span>
+                                    <br>
+                                        <span class="pl-3 variables">String</span> <span class="orange">acsTransId</span> <span class="new">=</span> <span class="orange">threeDSecureData</span><span class="variables">.getAcsTransactionId</span><span class="variables">();</span> <span class="comments">// 13c701a3-5a88-4c45-89e9-ef65e50a8bf9</span>
+                                    <br>
+                                        <span class="pl-3 variables">String</span> <span class="orange">statusReason</span> <span class="new">=</span> <span class="orange">threeDSecureData</span><span class="variables">.getStatusReason</span><span class="variables">();</span> <span class="comments">// LOW_CONFIDENCE</span>
+                                    <br>
+                                        <span class="pl-3 variables">String</span> <span class="orange">authenticationSource</span> <span class="new">=</span> <span class="orange">threeDSecureData</span><span class="variables">.getAuthenticationSource</span><span class="variables">();</span> <span class="comments">// BROWSER</span>
+                                    <br>
+                                        <span class="pl-3 variables">String</span> <span class="orange">messageCategory</span> <span class="new">=</span> <span class="orange">threeDSecureData</span><span class="variables">.getMessageCategory</span><span class="variables">();</span> <span class="comments">// PAYMENT_AUTHENTICATION</span>
+                                    <br>
+                                        <span class="variables">}</span>
+                                </code>
+                            </div>
+                        </div>   
+                    </div>
+                    <!-- /Punto 8 -->
+
+                    <!-- Punto 9 -->
+                    <div class="contenedor">
+                        <div class="pl-3 pt-3 pr-3 pb-4 mb-3 text-justify">
+                            <h3 class="pt-1" id="authDocs">
+                                9. Autorización
+                            </h3>
+
+                            <hr>
+                            
+                            <p>
+                                Si está procesando el pago con Addon Payments una vez que el proceso 3D Secure esté completo y dependiendo del valor ECI devuelto, podemos proceder con la autorización incluyendo los datos de autenticación.
+                                 La transacción se procesará con normalidad y puede tener éxito o rechazarse según criterios estándar (fondos suficientes, código de seguridad correcto ingresado...).
+                            </p>
+
+                            <div class="p-4 panelCode">
+                                <code>
+                                        <span class="comments">// Importamos las clases necesarias iniciar la autenticación</span>
+                                    <br>
+                                        <span class="purple">import </span><span class="variables">java.math.BigDecimal</span><span class="new">;</span>
+                                    <br>
+                                    <br>
+                                        <span class="purple">import </span><span class="variables">org.junit.Test</span><span class="new">;</span>
+                                    <br>
+                                    <br>
+                                        <span class="purple">import </span><span class="variables">com.global.api.ServicesContainer</span><span class="new">;</span>
+                                    <br>
+                                        <span class="purple">import </span><span class="variables">com.global.api.entities.exceptions.ApiException</span><span class="new">;</span>
+                                    <br>
+                                        <span class="purple">import </span><span class="variables">com.global.api.paymentMethods.CreditCardData</span><span class="new">;</span>
+                                    <br>
+                                        <span class="purple">import </span><span class="variables">com.global.api.serviceConfigs.GatewayConfig</span><span class="new">;</span>
+                                    <br>
+                                        <span class="purple">import </span><span class="variables">com.global.api.entities.Transaction</span><span class="new">;</span>
+                                    <br>
+                                        <span class="purple">import </span><span class="variables">com.global.api.entities.ThreeDSecure</span><span class="new">;</span>
+                                    <br>
+                                    <br>
+                                        <span class="comments">// Configuramos el cliente y los ajustes de la petición</span>
+                                    <br>
+                                        <span class="variables">GatewayConfig </span><span class="orange">config </span><span class="new">= new </span><span class="variables">GatewayConfig();</span>
+                                    <br>
+                                        <span class="orange">config.</span><span class="variables">setMerchantId(</span><span class="new">"addonjavatest"</span><span class="variables">);</span>
+                                    <br>
+                                        <span class="orange">config.</span><span class="variables">setAccountId(</span><span class="new">"3ds2"</span><span class="variables">);</span>
+                                    <br>
+                                        <span class="orange">config.</span><span class="variables">setSharedSecret(</span><span class="new">"secret"</span><span class="variables">);</span>
+                                    <br>
+                                        <span class="orange">config.</span><span class="variables">setServiceUrl(</span><span class="new">"https://api.sandbox.realexpayments.com/epage-remote.cgi"</span><span class="variables">);</span>
+                                    <br>
+                                        <span class="variables">ServicesContainer.configureService(</span><span class="orange">config</span><span class="variables">);</span>
+                                    <br>
+                                    <br>
+                                        <span class="comments">// Creamos el objeto de la tarjeta</span>
+                                    <br>
+                                        <span class="new">CreditCardData </span><span class="variables">card </span><span class="new">= </span><span class="purple">new </span><span class="variables">CreditCardData();</span>
+                                    <br>
+                                        <span class="new">card.</span><span class="variables">setNumber(</span><span class="new">"4012001038488884"</span><span class="variables">);</span>
+                                    <br>
+                                        <span class="new">card.</span><span class="variables">setExpMonth(</span><span class="new">12</span><span class="variables">);</span>
+                                    <br>
+                                        <span class="new">card.</span><span class="variables">setExpYear(</span><span class="new">2025</span><span class="variables">);</span>
+                                    <br>
+                                        <span class="new">card.</span><span class="variables">setCvn(</span><span class="new">"123"</span><span class="variables">);</span>
+                                    <br>
+                                        <span class="new">card.</span><span class="variables">setCardHolderName(</span><span class="new">"John Doe"</span><span class="variables">);</span>
+                                    <br>
+                                    <br>
+                                        <span class="comments">// Añadimos los datos de autenticación 3DS2</span>
+                                    <br>
+                                        <span class="new">ThreeDSecure </span><span class="variables">threeDSecureData </span><span class="new">= </span><span class="purple">new </span><span class="variables">ThreeDSecure();</span>
+                                    <br>
+                                        <span class="new">threeDSecureData.</span><span class="variables">setAuthenticationValue(</span><span class="new">"ODQzNjgwNjU0ZjM3N2JmYTg0NTM="</span><span class="variables">);</span>
+                                    <br>
+                                        <span class="new">threeDSecureData.</span><span class="variables">setDirectoryServerTransactionId(</span><span class="new">"c272b04f-6e7b-43a2-bb78-90f4fb94aa25"</span><span class="variables">);</span>
+                                    <br>
+                                        <span class="new">threeDSecureData.</span><span class="variables">setEci(</span><span class="new">"05"</span><span class="variables">);</span>
+                                    <br>
+                                        <span class="new">threeDSecureData.</span><span class="variables">setMessageVersion(</span><span class="new">"2.1.0"</span><span class="variables">);</span>
+                                    <br>
+                                    <br>
+                                        <span class="comments">// Añadimos los datos de autenticación 3DS2 al objeto "card"</span>
+                                    <br>
+                                        <span class="new">card.</span><span class="variables">setThreeDSecure(</span><span class="orange">threeDSecureData</span><span class="variables">);</span>
+                                    <br>
+                                        <span class="new">Transaction </span><span class="variables">response </span><span class="new">= </span><span class="new">null</span><span class="variables">;</span>
+                                    <br>
+                                    <br>
+                                        <span class="comments">// Lanzamos la petición al servidor de Addon Payments</span>
+                                    <br>
+                                        <span class="purple">try </span><span class="variables">{</span>
+                                    <br>
+                                        <span class="pl-3 variables">response </span> <span class="new">= card.</span><span class="variables">charge(</span><span class="purple">new </span><span class="variables">BigDecimal(</span><span class="new">"10.01"</span><span class="variables">))</span>
+                                    <br>
+                                        <span class="pl-5 variables">.withCurrency(</span><span class="new">"EUR"</span><span class="variables">)</span>
+                                    <br>
+                                        <span class="pl-5 variables">.execute();</span>
+                                    <br>
+                                    <br>
+                                        <span class="variables">}</span><span class="purple"> catch</span> <span class="variables">(ApiException exc) {</span>
+                                    <br>
+                                        <span class="pl-3 comments">// Añada aquí su tratamiento de errores</span>
+                                    <br>
+                                        <span class="pl-3 variables">String <span class="orange">errorMessage </span><span class="variables">= </span><span class="orange">exc</span><span class="variables">.getMessage();</span>
+                                    <br>
+                                        <span class="variables">}</span>
+                                    <br>
+                                    <br>
+                                        <span class="comments">// Obtenemos la respuesta y la mostramos</span>
+                                    <br>
+                                        <span class="new">if </span><span class="variables">(</span><span class="orange">response</span> <span class="new">!=</span> <span class="require">null</span><span class="variables">) {</span>
+                                    <br>
+                                        <span class="pl-3 variables">String</span> <span class="orange">result</span> <span class="new">=</span> <span class="orange">response</span><span class="variables">.getResponseCode</span><span class="variables">();</span> <span class="comments">// 00 == Success</span>
+                                    <br>
+                                        <span class="pl-3 variables">String</span> <span class="orange">message</span> <span class="new">=</span> <span class="orange">response</span><span class="variables">.getResponseMessage</span><span class="variables">();</span> <span class="comments">// [ test system ] AUTHORISED</span>
+                                    <br>
+                                    <br>
+                                        <span class="comments pl-3">// Obtenemos los datos para guardar en bbdd para futuras respuestas</span>
+                                    <br>
+                                        <span class="pl-3 variables">String</span> <span class="orange">orderId</span> <span class="new">=</span> <span class="orange">response</span><span class="variables">.getOrderId</span><span class="variables">();</span> <span class="comments">// ezJDQjhENTZBLTdCNzNDQw</span>
+                                    <br>
+                                        <span class="pl-3 variables">String</span> <span class="orange">authCode</span> <span class="new">=</span> <span class="orange">response</span><span class="variables">.getAuthorizationCode</span><span class="variables">();</span> <span class="comments">// 12345</span>
+                                    <br>
+                                        <span class="pl-3 variables">String</span> <span class="orange">paymentsReference</span> <span class="new">=</span> <span class="orange">response</span><span class="variables">.getTransactionId</span><span class="variables">();</span> <span class="comments">// pasref</span>
+                                    <br>
+                                        <span class="pl-3 variables">String</span> <span class="orange">schemeReferenceData</span> <span class="new">=</span> <span class="orange">response</span><span class="variables">.getSchemeId</span><span class="variables">();</span> <span class="comments">// MMC0F00YE4000000715</span>
+                                    <br>
+                                        <span class="variables">}</span>
+                                    <br>
+                                </code>
+                            </div>
+                        </div>   
+                    </div>
+                    <!-- /Punto 9 -->
+
+                </div>
+                <!-- /Contenido común -->
+            </div>
+        </div>
+    </div>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        <script src="../../../../assets/js/barraprogreso.js"></script>
+</body>
+</html>
