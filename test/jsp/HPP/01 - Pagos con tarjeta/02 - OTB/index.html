@@ -151,6 +151,7 @@
                         <hr class="m-0 p-0">
                             <a class="dropdown-item pl-2" href="../../05%20-%203DS2/01%20-%20Autorización/index.html">Autorización</a>
                             <a class="dropdown-item pl-2" href="../../05%20-%203DS2/02%20-%20Datos%20adicionales/index.html">Datos adicionales</a>
+                            <a class="dropdown-item pl-2" href="../../05%20-%203DS2/03%20-%20OTB/index.html">OTB con 3DS2</a>
                     </div>
                 </li>
               </ul>
@@ -481,8 +482,8 @@
                         </p>
                         <ul>
                           <li>
-                              Indicamos la ruta del archivo html que realiza la petición al servidor de html: 
-                              <span class="arrow">$.getJSON(</span><span class="comentariosBgW">"request.html"</span><span class="arrow">)</span>
+                              Indicamos la ruta del archivo jsp que realiza la petición al servidor de html: 
+                              <span class="arrow">$.getJSON(</span><span class="comentariosBgW">"request.jsp"</span><span class="arrow">)</span>
                           </li>
 
                           <br>
@@ -505,7 +506,7 @@
                             <br>
                                 <span class="pl-4">$</span><span class="require">(</span><span class="service">document</span><span class="require">).</span><span class="new">ready(</span><span class="function">function</span><span class="new">() {</span>
                             <br>
-                                <span class="pl-5">$.</span><span class="new">getJSON(</span><span class="require">"</span><span class="green">request.html</span><span class="require">"</span><span class="new">,</span> <span class="function">function</span><span class="require">(</span><span class="orange">jsonFromRequestEndpoint</span><span class="require">) {</span>
+                                <span class="pl-5">$.</span><span class="new">getJSON(</span><span class="require">"</span><span class="green">request.jsp</span><span class="require">"</span><span class="new">,</span> <span class="function">function</span><span class="require">(</span><span class="orange">jsonFromRequestEndpoint</span><span class="require">) {</span>
                             <br>
                                 <span class="pl-5 service">RealexHpp</span><span class="new">.setHppUrl(</span><span class="require">"</span><span class="green">https://hpp.sandbox.addonpayments.com/pay</span><span class="require">"</span><span class="new">);</span>
                             <br>

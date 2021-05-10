@@ -63,8 +63,8 @@
                             <div class="dropdown-header text-center p-0">HPP</div>
                             <hr class="m-0 p-0">
                                 <a class="dropdown-item pl-2" href="../../01%20-%20Pagos%20con%20tarjeta/01%20-%20Autorizacion/index.html">Autorización</a>
-                                <a class="dropdown-item pl-2" href="../../02%20-%20OTB/index.html">OTB</a>
-                                <a class="dropdown-item pl-2" href="../../03%20-%20Pay%20By%20Link/index.html">Pay By Link</a>
+                                <a class="dropdown-item pl-2" href="../../01%20-%20Pagos%20con%20tarjeta/02%20-%20OTB/index.html">OTB</a>
+                                <a class="dropdown-item pl-2" href="../../01%20-%20Pagos%20con%20tarjeta/03%20-%20Pay%20By%20Link/index.html">Pay By Link</a>
                         </div>
                     </li>
                     <li class="nav-item ml-1 dropdown">
@@ -150,7 +150,8 @@
                             <div class="dropdown-header text-center p-0">HPP</div>
                             <hr class="m-0 p-0">
                                 <a class="dropdown-item pl-2 active" href="#">Autorización</a>
-                                <a class="dropdown-item pl-2" href="../../05%20-%203DS2/02%20-%20Datos%20adicionales/index.html">Datos adicionales</a>
+                                <a class="dropdown-item pl-2" href="../02%20-%20Datos%20adicionales/index.html">Datos adicionales</a>
+                                <a class="dropdown-item pl-2" href="../03%20-%20OTB/index.html">OTB con 3DS2</a>
                         </div>
                     </li>
                 </ul>
@@ -282,7 +283,7 @@
                                         <br>
                                             <span class="orange">config.</span><span class="variables">setMerchantId(</span><span class="new">"addonjavatest"</span><span class="variables">);</span>
                                         <br>
-                                            <span class="orange">config.</span><span class="variables">setAccountId(</span><span class="new">"api"</span><span class="variables">);</span>
+                                            <span class="orange">config.</span><span class="variables">setAccountId(</span><span class="new">"3ds2"</span><span class="variables">);</span>
                                         <br>
                                             <span class="orange">config.</span><span class="variables">setSharedSecret(</span><span class="new">"secret"</span><span class="variables">);</span>
                                         <br>
@@ -403,7 +404,7 @@
                                             <br>
                                                 <span class="orange">config.</span><span class="variables">setMerchantId(</span><span class="new">"addonjavatest"</span><span class="variables">);</span>
                                             <br>
-                                                <span class="orange">config.</span><span class="variables">setAccountId(</span><span class="new">"api"</span><span class="variables">);</span>
+                                                <span class="orange">config.</span><span class="variables">setAccountId(</span><span class="new">"3ds2"</span><span class="variables">);</span>
                                             <br>
                                                 <span class="orange">config.</span><span class="variables">setSharedSecret(</span><span class="new">"secret"</span><span class="variables">);</span>
                                             <br>
@@ -577,8 +578,8 @@
                                 </p>
                                 <ul>
                                     <li>
-                                        Indicamos la ruta del archivo html que realiza la petición al servidor de html: 
-                                        <span class="arrow">$.getJSON(</span><span class="comentariosBgW">"request.html"</span><span class="arrow">)</span>
+                                        Indicamos la ruta del archivo jsp que realiza la petición al servidor de html: 
+                                        <span class="arrow">$.getJSON(</span><span class="comentariosBgW">"request.jsp"</span><span class="arrow">)</span>
                                     </li>
 
                                     <br>
