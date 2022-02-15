@@ -35,7 +35,7 @@ Para instalar vía [Maven](https://maven.apache.org/guides/introduction/introduc
 <dependency>
   <groupId>com.github.addonpayments</groupId>
   <artifactId>addonpayments-sdk</artifactId>
-  <version>2.1.0-SNAPSHOT</version>
+  <version>2.1.2-SNAPSHOT</version>
 </dependency>
 ```
 

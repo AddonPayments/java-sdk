@@ -189,7 +189,7 @@ public class Realex3dSecureTests {
                             .withOrderId(orderId)
                             .execute();
                     assertNotNull(response);
-                    assertEquals("00", response.getResponseCode());
+                    assertEquals("Enrolled", response.getResponseMessage());
                 }
                 else fail("Signature verification failed.");
             }

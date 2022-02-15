@@ -3,7 +3,7 @@
   
 	<groupId>com.github.addonpayments</groupId>
 	<artifactId>addonpayments-sdk</artifactId>
-	<version>2.1.1-SNAPSHOT</version>
+	<version>2.1.2-SNAPSHOT</version>
 	<description>Este SDK le permite procesar operaciones con sus terminales Addon Payments en su servidor Java.</description> 
 	
 	<build>

@@ -19,8 +19,8 @@ public class BuilderValidationTests {
     
     public BuilderValidationTests() throws ApiException {
         GatewayConfig config = new GatewayConfig();
-        config.setSecretApiKey("skapi_cert_MTeSAQAfG1UA9qQDrzl-kz4toXvARyieptFwSKP24w");
-        config.setServiceUrl("https://cert.api2.heartlandportico.com/Hps.Exchange.PosGateway/PosGatewayService.asmx");
+        config.setSecretApiKey("secretApiKey");
+        config.setServiceUrl("endpoint");
         
         ServicesContainer.configureService(config);
         
